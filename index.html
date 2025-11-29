@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>Abiram T Bijoy | Portfolio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Press+Start+2P&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Override to make the layout wider */
+        .container, .hero-content {
+            max-width: 1600px; /* Increased from the likely default (e.g., 1100px) */
+        }
+        .hero {
+            padding: 0 40px; /* Add some side padding to the hero section */
+        }
+    </style>
+</head>
+<body>
+    <div id="waves-container"></div>
+
+    <nav class="navbar">
+        <div class="logo">
+            <span class="pixel-icon"></span>
+            Abiram
+        </div>
+        <button class="mobile-menu-toggle" aria-label="Toggle menu" aria-expanded="false">
+            <span class="hamburger-line"></span>
+            <span class="hamburger-line"></span>
+            <span class="hamburger-line"></span>
+        </button>
+        <div class="nav-overlay"></div>
+        <div class="nav-links">
+            <a href="#about">About</a>
+            <a href="#gallery">Gallery</a>
+            <a href="#services">Services</a>
+            <a href="#experience">Experience</a>
+            <a href="#skills">Skills</a>
+            <a href="#projects">Projects</a>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <div class="hero-content">
+            <div class="badge">Available for hire</div>
+            <h1 id="typing-text">Hi, I'm Abiram T Bijoy.<br>Building the future.</h1>
+            <p class="subtitle">A results-oriented, final-year Information Technology student at CUSAT. Eager to secure a challenging entry-level position where I can apply my analytical and problem-solving skills to contribute to innovative technological solutions.</p>
+            <div class="cta-group">
+                <a href="#projects" class="btn btn-primary">View Projects</a>
+                <a href="resume.pdf" class="btn btn-secondary" download>Download Resume</a>
+            </div>
+        </div>
+        <div class="hero-image">
+            <div id="icon-cloud">
+                <canvas id="myCanvas" width="500" height="500">
+                    <p>Anything in here will be replaced on browsers that support the canvas element</p>
+                </canvas>
+            </div>
+            <div id="tags" style="display: none;">
+                <!-- Tags will be injected here via JS -->
+            </div>
+        </div>
+    </header>
+
+
+    <section id="gallery" class="section">
+        <div class="container">
+            <h2 class="section-title">Gallery</h2>
+        </div>
+        <div class="bento-grid fade-in">
+                <div class="bento-item main-item" data-image="images/8.jpg">
+                    <img src="images/8.jpg" alt="Abiram T Bijoy" loading="lazy">
+                    <div class="bento-overlay">
+                        <span>Me</span>
+                    </div>
+                </div>
+                <div class="bento-item gradient-1" data-image="images/2.jpg">
+                    <img src="images/2.jpg" alt="Abiram T Bijoy" loading="lazy">
+                </div>
+                <div class="bento-item gradient-2" data-image="images/3.jpg">
+                    <img src="images/3.jpg" alt="Abiram T Bijoy" loading="lazy">
+                </div>
+                <div class="bento-item wide-item gradient-3" data-image="images/4.jpg">
+                    <img src="images/4.jpg" alt="Abiram T Bijoy" loading="lazy">
+                </div>
+                <div class="bento-item wide-item gradient-4" data-image="images/12.jpg">
+                    <img src="images/12.jpg" alt="Abiram T Bijoy" loading="lazy">
+                </div>
+                <div class="bento-item wide-item gradient-5" data-image="images/6.jpg">
+                    <img src="images/6.jpg" alt="Abiram T Bijoy" loading="lazy">
+                </div>
+                <div class="bento-item gradient-6" data-image="images/7.jpg">
+                    <img src="images/7.jpg" alt="Abiram T Bijoy" loading="lazy">
+                </div>
+                <div class="bento-item gradient-7" data-image="images/1.jpg">
+                    <img src="images/1.jpg" alt="Abiram T Bijoy" loading="lazy">
+                </div>
+                <div class="bento-item gradient-8" data-image="images/9.jpg">
+                    <img src="images/9.jpg" alt="Abiram T Bijoy" loading="lazy">
+                </div>
+                <div class="bento-item wide-item gradient-9" data-image="images/10.jpg">
+                    <img src="images/10.jpg" alt="Abiram T Bijoy" loading="lazy">
+                </div>
+        </div>
+    </section>
+
+    <!-- Image Modal -->
+    <div id="image-modal" class="modal">
+        <span class="close-modal">&times;</span>
+        <img class="modal-content" id="modal-img">
+        <div id="caption"></div>
+    </div>
+
+    <section id="services" class="section bg-light">
+        <div class="container">
+            <h2 class="section-title">What I Do</h2>
+            <div class="services-grid">
+                <div class="service-card fade-in">
+                    <div class="service-icon">💻</div>
+                    <h3>Full Stack Development</h3>
+                    <p>Building robust web applications using React, Node.js, and Modern PHP.</p>
+                </div>
+                <div class="service-card fade-in delay-100">
+                    <div class="service-icon">📱</div>
+                    <h3>Mobile Development</h3>
+                    <p>Creating cross-platform mobile experiences with Flutter and Dart.</p>
+                </div>
+                <div class="service-card fade-in delay-200">
+                    <div class="service-icon">🤖</div>
+                    <h3>AI Integration</h3>
+                    <p>Implementing generative AI solutions and smart automation.</p>
+                </div>
+                <div class="service-card fade-in delay-300">
+                    <div class="service-icon">🎨</div>
+                    <h3>UI/UX Design</h3>
+                    <p>Designing intuitive interfaces with Figma and user-centric principles.</p>
+                </div>
+                <div class="service-card fade-in delay-400">
+                    <div class="service-icon">🎮</div>
+                    <h3>Game Development</h3>
+                    <p>Crafting immersive games with Unity and creating 3D assets with Blender.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="experience" class="section">
+        <div class="container">
+            <h2 class="section-title">Experience</h2>
+        </div>
+        <div class="section-full-width">
+            <div class="timeline">
+                <div class="timeline-item slide-up">
+                    <div class="timeline-date">Sept 2025 - Oct 2025</div>
+                    <div class="timeline-content">
+                        <h3>Generative AI Intern</h3>
+                        <span class="company">IBM x CUSAT</span>
+                        <p>Built an AI legal summarizer by mastering prompt engineering, using Python, the LLMs API, Google Colab, and IBM Cloud. This involved iteratively refining prompts to extract and format key case details from unstructured legal PDFs.</p>
+                    </div>
+                </div>
+                <div class="timeline-item slide-up delay-100">
+                    <div class="timeline-date">May 2025 - June 2025</div>
+                    <div class="timeline-content">
+                        <h3>App Developer Intern</h3>
+                        <span class="company">X Boson AI x CUSAT</span>
+                        <p>Flutter Frontend Developer & PHP Backend Assistant; built responsive UIs, integrated REST APIs, optimized database queries, and supported scalable product deployment.</p>
+                    </div>
+                </div>
+                <div class="timeline-item slide-up delay-200">
+                    <div class="timeline-date">Feb 2025 - Mar 2025</div>
+                    <div class="timeline-content">
+                        <h3>Software Developer Intern</h3>
+                        <span class="company">Wattlecorp Cybersecurity Labs</span>
+                        <p>Contributed to full-stack development, implemented RESTful APIs, optimized SQL queries, managed cloud deployments(n8n), and enhanced application performance through refactoring and debugging.</p>
+                    </div>
+                </div>
+                <div class="timeline-item slide-up delay-300">
+                    <div class="timeline-date">Dec 2022 - May 2023</div>
+                    <div class="timeline-content">
+                        <h3>UI/UX Intern</h3>
+                        <span class="company">Mark-P</span>
+                        <p>Focused on user-centered design, wireframing, and prototyping using Figma while learning core web development (HTML, CSS, JavaScript) to build intuitive and responsive interfaces.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="skills" class="section">
+        <div class="container">
+            <h2 class="section-title">Skills</h2>
+        </div>
+        <div class="section-full-width">
+            <!-- Filter Buttons -->
+            <div class="skills-filter fade-in">
+                <button class="filter-btn active" data-filter="all">All Skills</button>
+                <button class="filter-btn" data-filter="technical">Technical</button>
+                <button class="filter-btn" data-filter="languages">Languages & Frameworks</button>
+                <button class="filter-btn" data-filter="design">Design & Research</button>
+                <button class="filter-btn" data-filter="soft">Soft Skills</button>
+            </div>
+
+            <!-- Skills Display -->
+            <div class="skills-container fade-in delay-100">
+                <div class="skill-category" data-category="technical">
+                   
+                    <div class="tags">
+                        <span class="skill-tag">NLP</span>
+                        <span class="skill-tag">Chatbot Development</span>
+                        <span class="skill-tag">Automation</span>
+                        <span class="skill-tag">Machine Learning</span>
+                        <span class="skill-tag">Ethical Hacking</span>
+                        <span class="skill-tag">Cloud Computing</span>
+                        <span class="skill-tag">Deployment & Hosting</span>
+                        <span class="skill-tag">Web Hosting</span>
+                        <span class="skill-tag">Testing</span>
+                        <span class="skill-tag">DevOps</span>
+                        <span class="skill-tag">IT Integration</span>
+                        <span class="skill-tag">Web Development</span>
+                        <span class="skill-tag">Full-Stack Development</span>
+                        <span class="skill-tag">Front-End Development</span>
+                        <span class="skill-tag">Back-End Development</span>
+                        <span class="skill-tag">Backend API</span>
+                        <span class="skill-tag">Mobile Applications</span>
+                        <span class="skill-tag">Mobile App Development</span>
+                        <span class="skill-tag">Database Management</span>
+                        <span class="skill-tag">Databases</span>
+                        <span class="skill-tag">Authentication Systems</span>
+                        <span class="skill-tag">REST</span>
+                        <span class="skill-tag">REST APIs</span>
+                    </div>
+                </div>
+                <div class="skill-category" data-category="languages">
+                    
+                    <div class="tags">
+                        <span class="skill-tag">Python</span>
+                        <span class="skill-tag">PHP</span>
+                        <span class="skill-tag">React.js</span>
+                        <span class="skill-tag">React Native</span>
+                        <span class="skill-tag">Node.js</span>
+                        <span class="skill-tag">Express.js</span>
+                        <span class="skill-tag">Flutter</span>
+                        <span class="skill-tag">TypeScript</span>
+                        <span class="skill-tag">Tailwind CSS</span>
+                        <span class="skill-tag">CSS</span>
+                        <span class="skill-tag">HTML</span>
+                        <span class="skill-tag">Expo Go</span>
+                        <span class="skill-tag">PhpMyAdmin</span>
+                        <span class="skill-tag">Supabase</span>
+                    </div>
+                </div>
+                <div class="skill-category" data-category="design">
+                    
+                    <div class="tags">
+                        <span class="skill-tag">User Experience (UX)</span>
+                        <span class="skill-tag">User Interface Design</span>
+                        <span class="skill-tag">UI/UX</span>
+                        <span class="skill-tag">Designer</span>
+                        <span class="skill-tag">Research Skills</span>
+                        <span class="skill-tag">Market Research</span>
+                        <span class="skill-tag">Website Updating</span>
+                        <span class="skill-tag">Figma</span>
+                    </div>
+                </div>
+                <div class="skill-category" data-category="soft">
+                    
+                    <div class="tags">
+                        <span class="skill-tag">Communication</span>
+                        <span class="skill-tag">English</span>
+                        <span class="skill-tag">Project Management</span>
+                        <span class="skill-tag">Support Services</span>
+                        <span class="skill-tag">Training</span>
+                        <span class="skill-tag">Agile & Scrum</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects" class="section bg-light">
+        <div class="container">
+            <h2 class="section-title">Selected Projects</h2>
+        </div>
+        <div class="section-full-width">
+            <div class="bento-card-grid">
+                <!-- N.E.X.T. -->
+                <a href="#" class="bento-card bento-col-span-2 slide-up">
+                    <div class="bento-card-bg"><div class="bento-card-bg-pattern"></div></div>
+                    <div class="bento-card-content">
+                        <div class="bento-card-header">
+                            <div class="bento-icon-box">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline><polyline points="17 6 23 6 23 12"></polyline></svg>
+                            </div>
+                            <span class="bento-status">Live</span>
+                        </div>
+                        <div>
+                            <div class="bento-title">N.E.X.T. <span class="bento-meta">v1.0</span></div>
+                            <p class="bento-description">Developed a full-stack platform connecting startups with investors, enabling investment tracking and updates through a responsive Flutter frontend and PHP backend.</p>
+                        </div>
+                        <div class="bento-footer">
+                            <div class="bento-tags">
+                                <span class="bento-tag">#Flutter</span>
+                                <span class="bento-tag">#PHP</span>
+                                <span class="bento-tag">#Startup</span>
+                            </div>
+                            <span class="bento-cta">View Project &rarr;</span>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- SAIT Placement Portal -->
+                <a href="#" class="bento-card bento-col-span-1 slide-up delay-100">
+                    <div class="bento-card-bg"><div class="bento-card-bg-pattern"></div></div>
+                    <div class="bento-card-content">
+                        <div class="bento-card-header">
+                            <div class="bento-icon-box">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+                            </div>
+                            <span class="bento-status">Beta</span>
+                        </div>
+                        <div>
+                            <div class="bento-title">SAIT Placement Portal</div>
+                            <p class="bento-description">A streamlined platform designed to bridge students, academic institutions, and recruiters to simplify campus recruitment.</p>
+                        </div>
+                        <div class="bento-footer">
+                            <div class="bento-tags">
+                                <span class="bento-tag">#HTML</span>
+                                <span class="bento-tag">#JS</span>
+                            </div>
+                            <span class="bento-cta">Explore &rarr;</span>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Placeholder Project 1 -->
+                <div class="bento-card bento-col-span-1 slide-up delay-200">
+                    <div class="bento-card-bg"><div class="bento-card-bg-pattern"></div></div>
+                    <div class="bento-card-content">
+                        <div>
+                            <div class="bento-title">New Project Title</div>
+                            <p class="bento-description">A brief description of this awesome project will go here.</p>
+                        </div>
+                        <div class="project-image-gallery">
+                            <div class="image-block"></div><div class="image-block"></div><div class="image-block"></div><div class="image-block"></div><div class="image-block"></div><div class="image-block"></div><div class="image-block"></div><div class="image-block"></div><div class="image-block"></div><div class="image-block"></div>
+                        </div>
+                        <div class="bento-footer">
+                            <div class="bento-tags"><span class="bento-tag">#Tech</span></div>
+                            <span class="bento-cta">Coming Soon &rarr;</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Placeholder Project 2 -->
+                <div class="bento-card bento-col-span-1 slide-up delay-300">
+                    <div class="bento-card-bg"><div class="bento-card-bg-pattern"></div></div>
+                    <div class="bento-card-content">
+                        <div>
+                            <div class="bento-title">Another Cool Project</div>
+                            <p class="bento-description">A brief description of this awesome project will go here.</p>
+                        </div>
+                        <div class="project-image-gallery">
+                            <div class="image-block"></div><div class="image-block"></div><div class="image-block"></div><div class="image-block"></div><div class="image-block"></div><div class="image-block"></div><div class="image-block"></div><div class="image-block"></div><div class="image-block"></div><div class="image-block"></div>
+                        </div>
+                        <div class="bento-footer">
+                            <div class="bento-tags"><span class="bento-tag">#GameDev</span></div>
+                            <span class="bento-cta">Coming Soon &rarr;</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Placeholder Project 3 -->
+                <div class="bento-card bento-col-span-1 slide-up delay-400">
+                    <div class="bento-card-bg"><div class="bento-card-bg-pattern"></div></div>
+                    <div class="bento-card-content">
+                        <div>
+                            <div class="bento-title">Third Project Example</div>
+                            <p class="bento-description">A brief description of this awesome project will go here.</p>
+                        </div>
+                        <div class="project-image-gallery">
+                            <div class="image-block"></div><div class="image-block"></div><div class="image-block"></div><div class="image-block"></div><div class="image-block"></div><div class="image-block"></div><div class="image-block"></div><div class="image-block"></div><div class="image-block"></div><div class="image-block"></div>
+                        </div>
+                        <div class="bento-footer">
+                            <div class="bento-tags"><span class="bento-tag">#AI</span></div>
+                            <span class="bento-cta">Coming Soon &rarr;</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Placeholder Project 4 -->
+                <div class="bento-card bento-col-span-2 slide-up">
+                    <div class="bento-card-bg"><div class="bento-card-bg-pattern"></div></div>
+                    <div class="bento-card-content">
+                        <div>
+                            <div class="bento-title">A Wider Project Card</div>
+                            <p class="bento-description">This project is important, so it gets more space. A brief description of this awesome project will go here.</p>
+                        </div>
+                        <div class="project-image-gallery">
+                            <div class="image-block"></div><div class="image-block"></div><div class="image-block"></div><div class="image-block"></div><div class="image-block"></div><div class="image-block"></div><div class="image-block"></div><div class="image-block"></div><div class="image-block"></div><div class="image-block"></div>
+                        </div>
+                        <div class="bento-footer">
+                            <div class="bento-tags"><span class="bento-tag">#FullStack</span><span class="bento-tag">#Cloud</span></div>
+                            <span class="bento-cta">Coming Soon &rarr;</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Placeholder Project 5 -->
+                <div class="bento-card bento-col-span-1 slide-up">
+                    <div class="bento-card-bg"><div class="bento-card-bg-pattern"></div></div>
+                    <div class="bento-card-content">
+                        <div>
+                            <div class="bento-title">Final Project</div>
+                            <p class="bento-description">A brief description of this awesome project will go here.</p>
+                        </div>
+                        <div class="project-image-gallery">
+                            <div class="image-block"></div><div class="image-block"></div><div class="image-block"></div><div class="image-block"></div><div class="image-block"></div><div class="image-block"></div><div class="image-block"></div><div class="image-block"></div><div class="image-block"></div><div class="image-block"></div>
+                        </div>
+                        <div class="bento-footer">
+                            <div class="bento-tags"><span class="bento-tag">#Mobile</span></div>
+                            <span class="bento-cta">Coming Soon &rarr;</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="logo">Abiram T Bijoy</div>
+                <div class="footer-dock">
+                    <a href="https://instagram.com" target="_blank" class="dock-item" aria-label="Instagram">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+                    </a>
+                    <a href="https://github.com/JustRamm" target="_blank" class="dock-item" aria-label="GitHub">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+                    </a>
+                    <a href="https://www.linkedin.com/in/abiram-t-bijoy/" target="_blank" class="dock-item" aria-label="LinkedIn">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+                    </a>
+                    <a href="https://wa.me/9061892761" target="_blank" class="dock-item" aria-label="WhatsApp">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
+                    </a>
+                </div>
+            </div>
+            <div class="copyright">
+                &copy; 2024 Abiram T Bijoy. Theme inspired by Jules.
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <button id="back-to-top" class="back-to-top" aria-label="Back to top">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M18 15l-6-6-6 6"/>
+        </svg>
+    </button>
+
+    <script type="module">
+        import { Waves } from './waves.js';
+        
+        // Initialize Waves
+        new Waves('#waves-container', {
+            strokeColor: '#ffffff', 
+            backgroundColor: '#000000',
+            pointerSize: 0.5
+        });
+    </script>
+    <script src="tagcanvas.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
