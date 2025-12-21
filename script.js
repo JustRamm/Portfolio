@@ -141,11 +141,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- Icon Cloud (TagCanvas) ---
     const slugs = [
-        "typescript", "javascript", "dart", "java", "react", "flutter", "android",
-        "html5", "css3", "nodedotjs", "express", "nextdotjs", "prisma", "amazonaws",
+        "typescript", "javascript", "dart", "openjdk", "react", "flutter", "android",
+        "html5", "nodedotjs", "express", "nextdotjs", "prisma",
         "postgresql", "firebase", "nginx", "vercel", "testinglibrary", "jest",
-        "cypress", "docker", "git", "jira", "github", "gitlab", "visualstudiocode",
-        "androidstudio", "sonarqube", "figma"
+        "cypress", "docker", "git", "jira", "github", "gitlab",
+        "androidstudio", "figma"
     ];
 
     const tagsContainer = document.getElementById('tags');
@@ -283,6 +283,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const isExpanded = mobileMenuToggle.getAttribute('aria-expanded') === 'true';
 
             mobileMenuToggle.setAttribute('aria-expanded', !isExpanded);
+            mobileMenuToggle.classList.toggle('active'); // Trigger CSS animation
             navLinks.classList.toggle('active');
 
             if (navOverlay) {
@@ -316,6 +317,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (navOverlay) {
                     navOverlay.classList.remove('active');
                 }
+                mobileMenuToggle.classList.remove('active'); // Reset icon
                 mobileMenuToggle.setAttribute('aria-expanded', 'false');
                 document.body.style.overflow = '';
             }

@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
-    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <title>Abiram T Bijoy | Portfolio</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -16,16 +16,17 @@
     <link rel="apple-touch-icon" href="images/2.jpg">
     <style>
         /* Override to make the layout wider */
+        /* Override to make the layout wider */
         .container,
-        .hero-content {
+        .hero-content,
+        .section-full-width {
             max-width: 1600px;
+            margin-left: auto;
+            margin-right: auto;
             /* Increased from the likely default (e.g., 1100px) */
         }
 
-        .hero {
-            padding: 0 40px;
-            /* Add some side padding to the hero section */
-        }
+        /* Hero padding handled in CSS */
     </style>
 </head>
 
@@ -160,7 +161,7 @@
         </div>
     </div>
 
-    <section id="services" class="section bg-light">
+    <section id="services" class="section">
         <div class="container">
             <h2 class="section-title">What I Do</h2>
             <div class="services-grid">
@@ -193,7 +194,7 @@
         </div>
     </section>
 
-    <section id="experience" class="section">
+    <section id="experience" class="section bg-light">
         <div class="container">
             <h2 class="section-title">Experience</h2>
         </div>

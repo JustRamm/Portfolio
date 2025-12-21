@@ -26,6 +26,8 @@
 
 html {
     scroll-behavior: smooth;
+    overflow-x: hidden;
+    /* Prevent horizontal scroll from off-canvas menu */
 }
 
 body {
@@ -37,6 +39,10 @@ body {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
+    overflow-x: hidden;
+    /* Double safety */
+    width: 100%;
+    margin: 0;
 }
 
 /* Typography */
@@ -1030,6 +1036,24 @@ a {
     /* Mobile Menu */
     .mobile-menu-toggle {
         display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        width: 30px;
+        height: 20px;
+        z-index: 1003;
+        /* Ensure it is above nav-links (1001) and navbar (1002) if needed */
+    }
+
+    .mobile-menu-toggle.active .hamburger-line:nth-child(1) {
+        transform: translateY(9px) rotate(45deg);
+    }
+
+    .mobile-menu-toggle.active .hamburger-line:nth-child(2) {
+        opacity: 0;
+    }
+
+    .mobile-menu-toggle.active .hamburger-line:nth-child(3) {
+        transform: translateY(-9px) rotate(-45deg);
     }
 
     .nav-links {
@@ -1120,12 +1144,18 @@ a {
         padding: 3rem 0;
         position: relative;
         z-index: 5;
+        width: 100%;
+        overflow: hidden;
+        /* Ensure no overflow */
     }
 
     .footer-content {
         flex-direction: column;
+        align-items: center;
+        /* Force center */
         text-align: center;
-        gap: 1.5rem;
+        gap: 2rem;
+        width: 100%;
     }
 
     .footer-dock {
@@ -1365,21 +1395,45 @@ a {
 
 @media (max-width: 768px) {
     .bento-grid {
-        grid-template-columns: repeat(2, 1fr);
-        grid-template-rows: auto;
+        display: flex;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
         gap: 1rem;
+        padding: 0 0 1rem 0;
+        /* Full bleed, no side padding */
+        width: 100%;
+        /* Smooth scrolling */
+        scroll-behavior: smooth;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    /* Hide scrollbar for Chrome, Safari and Opera */
+    .bento-grid::-webkit-scrollbar {
+        display: none;
+    }
+
+    /* Hide scrollbar for IE, Edge and Firefox */
+    .bento-grid {
+        -ms-overflow-style: none;
+        /* IE and Edge */
+        scrollbar-width: none;
+        /* Firefox */
+    }
+
+    .bento-item {
+        flex: 0 0 auto;
+        width: 260px;
+        height: 350px;
+        scroll-snap-align: center;
+        min-height: auto;
     }
 
     .bento-item.main-item,
     .bento-item.wide-item {
-        grid-column: span 2;
-        grid-row: auto;
-        min-height: 300px;
-    }
-
-    .bento-item {
-        min-height: 150px;
-        /* Slightly smaller for 2-col */
+        width: 260px;
+        /* Keep uniform width for consistent horizontal flow, or make slightly wider if preferred */
+        /* width: 320px; optional: make featured items wider */
+        min-height: auto;
     }
 
     /* Skills Filter Responsive */
@@ -1420,6 +1474,52 @@ a {
             padding: 0 0.5rem;
         }
 
+        /* Ensure proper width for containers */
+        .container,
+        .section-full-width,
+        .footer-content,
+        .bento-card-grid {
+            width: 100% !important;
+            max-width: 100% !important;
+            box-sizing: border-box;
+        }
+
+        /* Ensure grid is 1 column */
+        .bento-card-grid {
+            grid-template-columns: 1fr !important;
+            display: grid;
+        }
+
+        /* Center footer flex items */
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Hero Alignment */
+        .hero {
+            padding: 0 1rem !important;
+            flex-direction: column-reverse;
+            /* Ensure vertical stack on mobile */
+            text-align: center;
+            justify-content: center;
+            min-height: auto;
+            /* Allow height to shrink to fit content */
+            padding-top: 6rem !important;
+            padding-bottom: 4rem;
+        }
+
+        .cta-group {
+            justify-content: center;
+        }
+
+        .pixel-avatar {
+            transform: scale(2.5) !important;
+            /* Reduce size */
+            margin: 2rem 0 !important;
+        }
+
         /* Ensure grids inside don't add extra padding */
         .section-full-width .timeline,
         .section-full-width .skills-container,
@@ -1441,8 +1541,40 @@ a {
 
         /* Premium Menu on Mobile */
         .mobile-menu-toggle {
-            top: 1.5rem;
+            top: 2rem;
             right: 1.5rem;
+        }
+
+        .cta-group {
+            justify-content: center;
+        }
+
+        .hero-content {
+            width: 100%;
+            padding: 0 1rem;
+        }
+
+        .pixel-avatar {
+            /* Avatar uses box-shadows which don't take up layout space. 
+                We must reserve space with margins. */
+            transform: scale(1.5) !important;
+            margin: 3rem auto 3rem auto !important;
+            display: block;
+        }
+
+        /* Resize the 3D Icon Cloud Animation to half size */
+        #myCanvas {
+            max-width: 250px !important;
+            height: auto !important;
+            margin: 0 auto;
+            display: block;
+        }
+
+        .icon-cloud {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            margin-bottom: 2rem;
         }
     }
 }
