@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (i < plainText.length) {
                 const char = plainText.charAt(i);
                 const currentContent = textElement.innerHTML.replace('<span class="cursor">|</span>', '');
-                
+
                 if (char === '\n') {
                     textElement.innerHTML = currentContent + '<br>' + '<span class="cursor">|</span>';
                 } else {
@@ -19,12 +19,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 i++;
                 setTimeout(typeWriter, 50);
             } else {
-                 const cursor = textElement.querySelector('.cursor');
-                 if(cursor) {
-                     setInterval(() => {
-                         cursor.style.opacity = cursor.style.opacity === '0' ? '1' : '0';
-                     }, 500);
-                 }
+                const cursor = textElement.querySelector('.cursor');
+                if (cursor) {
+                    setInterval(() => {
+                        cursor.style.opacity = cursor.style.opacity === '0' ? '1' : '0';
+                    }, 500);
+                }
             }
         }
         setTimeout(typeWriter, 500);
@@ -54,23 +54,24 @@ document.addEventListener('DOMContentLoaded', () => {
     const closeModal = document.querySelector('.close-modal');
 
     if (modal && modalImg) {
-        document.querySelectorAll('.bento-item, .project-card, .bento-card').forEach(item => {
+        document.querySelectorAll('.bento-item, .image-block').forEach(item => {
             item.addEventListener('click', (e) => {
-                // If it's a link, allow default unless it has specific data-image behavior
-                // But generally, bento-cards are links to projects.
-                // The gallery items are .bento-item.
-                
+                e.stopPropagation(); // Prevent bubbling if nested
+
                 const dataImg = item.getAttribute('data-image');
                 const img = item.querySelector('img');
-                
+
                 let imgSrc = dataImg;
                 if (!imgSrc && img) imgSrc = img.src;
 
-                // If we found an image to show and it's not just a link wrapper
-                if (imgSrc && item.classList.contains('bento-item')) { 
+                // If we found an image to show
+                if (imgSrc) {
                     e.preventDefault();
                     modal.style.display = "flex";
-                    setTimeout(() => modal.classList.add('show'), 10);
+                    // Brief timeout to allow display:flex to apply before adding class for transition
+                    requestAnimationFrame(() => {
+                        modal.classList.add('show');
+                    });
                     modalImg.src = imgSrc;
                 }
             });
@@ -94,45 +95,45 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- Animated Dock ---
     const dockContainer = document.querySelector('.dock');
     const dockItems = document.querySelectorAll('.dock-item');
-    
+
     if (dockContainer && dockItems.length > 0) {
         const baseWidth = 40;
-        const maxExtraWidth = 40; 
-        const range = 150; 
-        
+        const maxExtraWidth = 40;
+        const range = 150;
+
         dockContainer.addEventListener('mousemove', (e) => {
             const mouseX = e.pageX;
-            
+
             dockItems.forEach(item => {
                 const rect = item.getBoundingClientRect();
                 const itemCenterX = rect.left + rect.width / 2 + window.scrollX;
                 const distance = Math.abs(mouseX - itemCenterX);
-                
+
                 let width = baseWidth;
-                
+
                 if (distance < range) {
-                    const val = (1 - distance / range); 
-                    width = baseWidth + (maxExtraWidth * val * val); 
+                    const val = (1 - distance / range);
+                    width = baseWidth + (maxExtraWidth * val * val);
                 }
-                
+
                 item.style.width = `${width}px`;
                 item.style.height = `${width}px`;
-                
+
                 const icon = item.querySelector('svg');
                 if (icon) {
-                     const scaleFactor = 1 + (width - baseWidth) / baseWidth * 0.5;
-                     icon.style.transform = `scale(${scaleFactor})`;
+                    const scaleFactor = 1 + (width - baseWidth) / baseWidth * 0.5;
+                    icon.style.transform = `scale(${scaleFactor})`;
                 }
             });
         });
-        
+
         dockContainer.addEventListener('mouseleave', () => {
             dockItems.forEach(item => {
                 item.style.width = `${baseWidth}px`;
                 item.style.height = `${baseWidth}px`;
                 const icon = item.querySelector('svg');
                 if (icon) {
-                     icon.style.transform = `scale(1)`;
+                    icon.style.transform = `scale(1)`;
                 }
             });
         });
@@ -154,12 +155,12 @@ document.addEventListener('DOMContentLoaded', () => {
             const link = document.createElement('a');
             link.href = '#';
             link.onclick = (e) => e.preventDefault();
-            
+
             const img = document.createElement('img');
             img.src = `https://cdn.simpleicons.org/${slug}/ffffff`;
             img.alt = slug;
             img.style.border = 'none';
-            
+
             link.appendChild(img);
             tagsContainer.appendChild(link);
         });
@@ -179,14 +180,14 @@ document.addEventListener('DOMContentLoaded', () => {
                     initial: [0.1, -0.1],
                     clickToFront: 600,
                     tooltip: 'native',
-                    imageMode: 'image', 
+                    imageMode: 'image',
                     imagePosition: 'center',
                     shape: 'sphere',
                     noSelect: true,
                     lock: 'xy'
                 });
             }
-        } catch(e) {
+        } catch (e) {
             console.error("Canvas failed to load", e);
             document.getElementById('icon-cloud').style.display = 'none';
         }
@@ -195,18 +196,18 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- Skills Filter ---
     const filterButtons = document.querySelectorAll('.filter-btn');
     const skillCategories = document.querySelectorAll('.skill-category');
-    
+
     if (filterButtons.length > 0 && skillCategories.length > 0) {
         // Function to filter and display skills
         function filterSkills(filterType) {
             skillCategories.forEach(category => {
                 const categoryType = category.getAttribute('data-category');
                 const categoryTitle = category.querySelector('.category-title');
-                
+
                 // Add fade out effect
                 category.style.opacity = '0';
                 category.style.transform = 'translateY(10px)';
-                
+
                 setTimeout(() => {
                     if (filterType === 'all') {
                         category.style.display = 'block';
@@ -217,7 +218,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         // Hide category titles when filtering (button already shows category name)
                         if (categoryTitle) categoryTitle.style.display = 'none';
                     }
-                    
+
                     // Fade in effect
                     setTimeout(() => {
                         category.style.opacity = '1';
@@ -226,18 +227,18 @@ document.addEventListener('DOMContentLoaded', () => {
                 }, 150);
             });
         }
-        
+
         // Initialize: show all skills with titles
         filterSkills('all');
-        
+
         filterButtons.forEach(button => {
             button.addEventListener('click', () => {
                 const filter = button.getAttribute('data-filter');
-                
+
                 // Update active button
                 filterButtons.forEach(btn => btn.classList.remove('active'));
                 button.classList.add('active');
-                
+
                 // Filter skills
                 filterSkills(filter);
             });
@@ -246,7 +247,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- Back to Top Button ---
     const backToTopButton = document.getElementById('back-to-top');
-    
+
     if (backToTopButton) {
         // Show/hide button based on scroll position
         function toggleBackToTop() {
@@ -256,7 +257,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 backToTopButton.classList.remove('visible');
             }
         }
-        
+
         // Scroll to top when button is clicked
         backToTopButton.addEventListener('click', () => {
             window.scrollTo({
@@ -264,10 +265,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 behavior: 'smooth'
             });
         });
-        
+
         // Listen to scroll events
         window.addEventListener('scroll', toggleBackToTop);
-        
+
         // Initial check
         toggleBackToTop();
     }
@@ -276,29 +277,29 @@ document.addEventListener('DOMContentLoaded', () => {
     const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
     const navLinks = document.querySelector('.nav-links');
     const navOverlay = document.querySelector('.nav-overlay');
-    
+
     if (mobileMenuToggle && navLinks) {
         function toggleMenu() {
             const isExpanded = mobileMenuToggle.getAttribute('aria-expanded') === 'true';
-            
+
             mobileMenuToggle.setAttribute('aria-expanded', !isExpanded);
             navLinks.classList.toggle('active');
-            
+
             if (navOverlay) {
                 navOverlay.classList.toggle('active');
             }
-            
+
             // Prevent body scroll when menu is open
             document.body.style.overflow = !isExpanded ? 'hidden' : '';
         }
-        
+
         mobileMenuToggle.addEventListener('click', toggleMenu);
-        
+
         // Close menu when clicking overlay
         if (navOverlay) {
             navOverlay.addEventListener('click', toggleMenu);
         }
-        
+
         // Close menu when clicking nav links
         navLinks.querySelectorAll('a').forEach(link => {
             link.addEventListener('click', () => {
@@ -307,7 +308,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             });
         });
-        
+
         // Close menu on window resize if it becomes desktop view
         window.addEventListener('resize', () => {
             if (window.innerWidth > 768) {
