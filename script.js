@@ -433,6 +433,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function stopGodModeEffects() {
+        document.body.style.height = '';
         if (physicsEngine) {
             Matter.World.clear(physicsEngine.world);
             Matter.Engine.clear(physicsEngine);
@@ -561,8 +562,8 @@ document.addEventListener('DOMContentLoaded', () => {
         render.canvas.style.position = 'fixed';
         render.canvas.style.top = '0';
         render.canvas.style.left = '0';
-        render.canvas.style.pointerEvents = 'auto'; // Capture mouse events
-        render.canvas.style.zIndex = '9999'; // Below Exit Button (10001) but above CRT overlay (9998)
+        render.canvas.style.pointerEvents = 'none'; // Allow scrolling through the debug canvas
+        render.canvas.style.zIndex = '9999';
 
         // 3. Create Bodies from DOM Elements
         // We select key UI cards to fall. Text falls are messy, so we stick to containers.
@@ -602,6 +603,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // Responsive boundaries relative to current scroll + viewport
         // We make a "container" that encloses the current scroll height + viewport
         const docHeight = Math.max(document.body.scrollHeight, document.body.offsetHeight);
+        document.body.style.height = `${docHeight}px`; // Prevent height collapse
         const groundY = docHeight + 100;
 
         const ground = Bodies.rectangle(window.innerWidth / 2, groundY, window.innerWidth * 2, 200, { isStatic: true });
@@ -616,7 +618,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // 5. Add Mouse Control
         // This is tricky because the canvas is fixed/screenspace but bodies are worldspace.
         // We need a mouse that tracks screen coordinates but interacts with the world.
-        const mouse = Mouse.create(render.canvas);
+        const mouse = Mouse.create(document.body); // Listen for events on the body to allow scrolling
         // Fix mouse offset for scrolling
 
         const mouseConstraint = MouseConstraint.create(engine, {
