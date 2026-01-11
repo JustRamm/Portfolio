@@ -547,7 +547,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // 1. Setup Engine using chaos-ready settings
         const engine = Engine.create();
-        engine.gravity.y = 1; // Normal gravity
+        engine.gravity.y = 0.4; // Slower gravity for a more cinematic "collapse"
         physicsEngine = engine;
 
         // 2. Setup Invisible Renderer for Mouse Interaction
@@ -571,7 +571,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // 3. Create Bodies from DOM Elements
         // We select key UI cards to fall. Text falls are messy, so we stick to containers.
-        const selector = '.bento-card, .service-card, .contact-option, .skill-tag, h1, h2';
+        const selector = '.bento-card, .service-card, .contact-option, .skill-tag, h1, h2, h3, .education-card, .about-text, .behind-the-code-card, .workflow-card, .github-calendar-wrapper, .badge, .cta-group .btn';
         const elements = Array.from(document.querySelectorAll(selector));
         const bodies = [];
 
@@ -587,15 +587,22 @@ document.addEventListener('DOMContentLoaded', () => {
             const centerY = rect.top + rect.height / 2 + window.scrollY;
 
             const body = Bodies.rectangle(centerX, centerY, rect.width, rect.height, {
-                restitution: 0.6, // Bounciness
+                restitution: 0.4, // Less bouncy
                 friction: 0.5,
-                density: 0.04,
-                angle: (Math.random() - 0.5) * 0.1 // Tiny random initial rotation
+                frictionAir: 0.06, // Significantly increased air friction for slow fall
+                density: 0.01, // Lighter items fall more naturally in "air"
+                angle: (Math.random() - 0.5) * 0.2 // Slightly more initial tilt
             });
 
             body.domElement = el; // Link back to DOM
 
-            // IMPORTANT: "Freeze" the visual element dimensions before we detach it from layout
+            // Apply a small random kick to ensure they break the layout immediately
+            Matter.Body.applyForce(body, body.position, {
+                x: (Math.random() - 0.5) * 0.02,
+                y: (Math.random() - 0.5) * 0.01
+            });
+
+            // IMPORTANT: "Freeze" the visual element dimensions
             el.style.width = `${rect.width}px`;
             el.style.height = `${rect.height}px`;
             // We will set position: fixed in the loop to start moving it
