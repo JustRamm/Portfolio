@@ -2920,11 +2920,10 @@ body.god-mode #god-mode-exit {
 /* Ensure inner content of full-width card aligns to the left as requested */
 .about-text p,
 .about-text .github-calendar-wrapper {
-    max-width: 1400px;
-    margin-left: 2rem;
-    /* Align with general container padding */
+    max-width: 1200px;
+    margin-left: auto;
     margin-right: auto;
-    width: calc(100% - 4rem);
+    width: 100%;
 }
 
 .about-text p {
@@ -3132,6 +3131,24 @@ body.god-mode #god-mode-exit {
 
     .behind-the-code-card h3 {
         font-size: 1.75rem;
+    }
+
+    .about-text p,
+    .about-text .github-calendar-wrapper {
+        margin-left: 0;
+        width: 100%;
+        padding: 0;
+    }
+
+    .calendar {
+        font-size: 12px;
+        min-height: 100px;
+    }
+
+    .calendar .contrib-number {
+        font-size: 1.2rem !important;
+        display: block;
+        text-align: center;
     }
 }
 

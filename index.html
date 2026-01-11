@@ -1062,8 +1062,9 @@
     <script src="https://unpkg.com/github-calendar@latest/dist/github-calendar.min.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            if (typeof GitHubCalendar === 'function') {
-                // Use a reliable proxy to fetch contribution data
+            const calendarEl = document.querySelector(".calendar");
+            if (typeof GitHubCalendar === 'function' && calendarEl) {
+                // Initialize the calendar
                 GitHubCalendar(".calendar", "JustRamm", {
                     responsive: true,
                     tooltips: true,
@@ -1072,17 +1073,21 @@
                             .then(res => res.text());
                     }
                 }).then(() => {
-                    // 1. Force hide EVERYTHING except the first column (Total Contributions)
+                    // Success! Now clean up the UI
                     const columns = document.querySelectorAll('.contrib-column');
                     columns.forEach((col, index) => {
+                        // Only show the first column (Total) on mobile/desktop for a cleaner look
                         if (index > 0) {
                             col.style.setProperty('display', 'none', 'important');
+                        } else {
+                            col.style.setProperty('width', '100%', 'important');
+                            col.style.setProperty('text-align', 'center', 'important');
                         }
                     });
 
-                    // 2. Remove any text containing "streak", "rock", or "hard place" just in case
-                    const allElements = document.querySelectorAll('.calendar *');
-                    allElements.forEach(el => {
+                    // Remove clutter text
+                    const allText = calendarEl.querySelectorAll('*');
+                    allText.forEach(el => {
                         if (el.children.length === 0) {
                             const text = el.innerText.toLowerCase();
                             if (text.includes('streak') || text.includes('rock') || text.includes('hard place')) {
@@ -1091,21 +1096,43 @@
                         }
                     });
 
-                    // 3. Fix the "0 total" issue with a reliable fallback
-                    const totalElem = document.querySelector('.contrib-number');
-                    fetch('https://github-contributions-api.deno.dev/JustRamm.json')
-                        .then(res => res.json())
-                        .then(data => {
-                            if (data.totalContributions > 0 && totalElem) {
-                                // Update with real data and big font
-                                totalElem.innerText = data.totalContributions + ' total contributions';
-                                totalElem.style.fontSize = '1.5rem';
-                            }
-                        })
-                        .catch(err => console.error("Fallback fetch failed:", err));
+                    // Force a fallback fetch to ensure the number is accurate and visible
+                    updateTotalContributions();
                 }).catch(err => {
-                    console.error("GitHub Calendar failed to load:", err);
+                    console.error("GitHub Calendar failed to load, trying fallback:", err);
+                    updateTotalContributions();
                 });
+            }
+
+            function updateTotalContributions() {
+                const totalElem = document.querySelector('.contrib-number');
+                const loadingElem = document.querySelector('.loading-calendar');
+
+                fetch('https://github-contributions-api.deno.dev/JustRamm.json')
+                    .then(res => res.json())
+                    .then(data => {
+                        if (data.totalContributions !== undefined) {
+                            if (loadingElem) loadingElem.style.display = 'none';
+
+                            // If the calendar library failed to create the element, we create it
+                            if (!totalElem) {
+                                const newTotal = document.createElement('div');
+                                newTotal.className = 'contrib-number';
+                                newTotal.innerHTML = data.totalContributions + ' total contributions';
+                                calendarEl.appendChild(newTotal);
+                            } else {
+                                totalElem.innerText = data.totalContributions + ' total contributions';
+                                totalElem.style.fontSize = '1.8rem';
+                                totalElem.style.fontWeight = '700';
+                            }
+                        }
+                    })
+                    .catch(err => {
+                        console.error("Fallback fetch failed:", err);
+                        if (loadingElem) {
+                            loadingElem.innerHTML = "<p>Data unavailable (Offline)</p>";
+                        }
+                    });
             }
         });
     </script>
