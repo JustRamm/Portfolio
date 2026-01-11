@@ -2182,6 +2182,16 @@ body.god-mode {
     --bg-color: #050505;
     font-family: 'Press Start 2P', monospace;
     /* Pixel font everywhere */
+    cursor: crosshair;
+}
+
+body.god-mode * {
+    cursor: crosshair !important;
+}
+
+body.god-mode ::selection {
+    background: var(--primary-color);
+    color: #000;
 }
 
 body.god-mode h1,
@@ -2391,7 +2401,7 @@ body.god-mode .contact-option {
 /* Exit Button */
 #god-mode-exit {
     position: fixed;
-    top: 1rem;
+    top: 1.5rem;
     right: 63rem;
     padding: 1rem 2rem;
     background: #000;
