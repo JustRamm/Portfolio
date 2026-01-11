@@ -773,4 +773,59 @@ document.addEventListener('DOMContentLoaded', () => {
             swipeHistory = [];
         }
     }
+    // --- Project Preview Modal ---
+    const previewModal = document.getElementById('project-preview-modal');
+    const previewIframe = document.getElementById('project-iframe');
+    const previewTitle = document.getElementById('preview-title');
+    const previewExternalLink = document.getElementById('preview-external-link');
+    const closePreviewBtn = document.querySelector('.close-preview');
+    const iframeLoader = document.querySelector('.iframe-loader');
+
+    if (previewModal && previewIframe) {
+        // Intercept all project links
+        document.querySelectorAll('.bento-card[href]').forEach(link => {
+            link.addEventListener('click', function (e) {
+                // Check if God Mode is active - if so, allow normal behavior (falling)
+                if (document.body.classList.contains('god-mode')) return;
+
+                const url = this.getAttribute('href');
+                const title = this.querySelector('.bento-title').innerText;
+
+                // If it's a valid external URL
+                if (url && url.startsWith('http')) {
+                    e.preventDefault();
+
+                    // Reset iframe and show loader
+                    previewIframe.src = url;
+                    previewTitle.innerText = title;
+                    previewExternalLink.href = url;
+                    iframeLoader.style.display = 'flex';
+                    previewModal.style.display = 'flex';
+
+                    // Hide loader when iframe finishes loading
+                    previewIframe.onload = () => {
+                        iframeLoader.style.display = 'none';
+                    };
+                }
+            });
+        });
+
+        const closePreview = () => {
+            previewModal.style.display = 'none';
+            previewIframe.src = ''; // Stop content
+        };
+
+        if (closePreviewBtn) closePreviewBtn.onclick = closePreview;
+
+        window.onclick = (event) => {
+            if (event.target == previewModal) closePreview();
+        };
+
+        // Handle Escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && previewModal.style.display === 'flex') {
+                closePreview();
+            }
+        });
+    }
 });
