@@ -1,4 +1,22 @@
 document.addEventListener('DOMContentLoaded', () => {
+    // --- Splash Screen ---
+    const splashScreen = document.getElementById('splash-screen');
+    if (splashScreen) {
+        document.body.classList.add('loading');
+
+        // Wait for animation to finish (approx 3s)
+        setTimeout(() => {
+            splashScreen.style.opacity = '0';
+            splashScreen.style.visibility = 'hidden';
+            document.body.classList.remove('loading');
+
+            // Allow time for fade out transition before removing from DOM
+            setTimeout(() => {
+                splashScreen.style.display = 'none';
+            }, 1500);
+        }, 3000);
+    }
+
     // --- Typography Animation (Hero) ---
     const textElement = document.getElementById('typing-text');
     if (textElement) {
@@ -322,5 +340,396 @@ document.addEventListener('DOMContentLoaded', () => {
                 document.body.style.overflow = '';
             }
         });
+    }
+
+
+    // --- Advanced God Mode (Matrix, CRT, Gravity) ---
+    const konamiCode = [
+        "ArrowUp", "ArrowUp", "ArrowDown", "ArrowDown",
+        "ArrowLeft", "ArrowRight", "ArrowLeft", "ArrowRight",
+        "b", "a"
+    ];
+
+    // Mobile uses swipes for arrows, ignoring B/A for easier activation
+    const mobileKonami = [
+        "Up", "Up", "Down", "Down",
+        "Left", "Right", "Left", "Right"
+    ];
+
+    let keyHistory = [];
+    let swipeHistory = [];
+    let touchStartX = 0;
+    let touchStartY = 0;
+    let physicsEngine = null; // Store reference to destroy later
+    let physicsRunner = null;
+    let matrixInterval = null;
+    let animationFrameId = null;
+
+    // Mobile Activation (5 Taps on Logo)
+    const navLogoText = document.getElementById('nav-logo-text');
+    let logoTapCount = 0;
+    let logoTapTimer = null;
+
+    if (navLogoText) {
+        navLogoText.addEventListener('click', (e) => {
+            // Prevent default navigation if wrapped in a link
+            e.preventDefault();
+
+            logoTapCount++;
+
+            // Reset count if too much time passes between taps (500ms)
+            clearTimeout(logoTapTimer);
+            logoTapTimer = setTimeout(() => {
+                logoTapCount = 0;
+            }, 500);
+
+            if (logoTapCount >= 5) {
+                toggleGodMode(true);
+                logoTapCount = 0; // Reset after activation
+            }
+        });
+    }
+
+    // Create UI Elements
+    const toast = document.createElement('div');
+    toast.id = "god-mode-toast";
+    toast.innerHTML = "🏆 GOD MODE ACTIVATED<br>SYSTEM COMPROMISED";
+    document.body.appendChild(toast);
+
+    const exitBtn = document.createElement('button');
+    exitBtn.id = "god-mode-exit";
+    exitBtn.innerText = "EXIT SIMULATION";
+    document.body.appendChild(exitBtn);
+
+    const canvas = document.createElement('canvas');
+    canvas.id = 'matrix-canvas';
+    document.body.prepend(canvas);
+
+    // Toggle Function
+    function toggleGodMode(active) {
+        if (active) {
+            document.body.classList.add('god-mode');
+            toast.classList.add('show');
+            setTimeout(() => toast.classList.remove('show'), 4000);
+
+            // 1. Start Matrix Rain
+            startMatrixRain();
+
+            // 2. Start Gravity Physics (Matter.js)
+            if (!window.Matter) {
+                const script = document.createElement('script');
+                script.src = "https://cdnjs.cloudflare.com/ajax/libs/matter-js/0.19.0/matter.min.js";
+                script.onload = () => enablePhysics();
+                document.head.appendChild(script);
+            } else {
+                enablePhysics();
+            }
+
+            // Play Sound
+            playSound(true);
+
+        } else {
+            // Deactivate
+            document.body.classList.remove('god-mode');
+
+            // Allow page reload to fully reset physics mess
+            if (confirm("Disabling God Mode requires a system reboot to restore order. Reload now?")) {
+                location.reload();
+            } else {
+                stopGodModeEffects();
+            }
+        }
+    }
+
+    function stopGodModeEffects() {
+        if (physicsEngine) {
+            Matter.World.clear(physicsEngine.world);
+            Matter.Engine.clear(physicsEngine);
+            if (physicsRunner) Matter.Runner.stop(physicsRunner);
+            physicsEngine = null;
+            physicsRunner = null;
+        }
+        if (animationFrameId) {
+            cancelAnimationFrame(animationFrameId);
+        }
+        stopMatrixRain();
+
+        // Reset DOM elements styles
+        const elements = document.querySelectorAll('.bento-card, .service-card, .contact-option, h1, h2, .chip, .bento-tag, .skill-tag');
+        elements.forEach(el => {
+            el.style.position = '';
+            el.style.top = '';
+            el.style.left = '';
+            el.style.transform = '';
+            el.style.zIndex = '';
+            el.style.margin = '';
+            // Don't reset width here abruptly or layout shifts might be ugly, but removing style is correct
+            el.style.width = '';
+            el.style.height = '';
+        });
+    }
+
+    exitBtn.addEventListener('click', () => toggleGodMode(false));
+
+    function playSound(isStart) {
+        try {
+            const AudioContext = window.AudioContext || window.webkitAudioContext;
+            if (AudioContext) {
+                const ctx = new AudioContext();
+                const osc = ctx.createOscillator();
+                const gain = ctx.createGain();
+
+                osc.type = isStart ? 'sawtooth' : 'sine';
+
+                // Professional Glitch Sound
+                if (isStart) {
+                    osc.frequency.setValueAtTime(100, ctx.currentTime);
+                    osc.frequency.linearRampToValueAtTime(1000, ctx.currentTime + 0.1);
+                    osc.frequency.exponentialRampToValueAtTime(100, ctx.currentTime + 0.3);
+                }
+
+                gain.gain.setValueAtTime(0.05, ctx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.5);
+
+                osc.connect(gain);
+                gain.connect(ctx.destination);
+                osc.start();
+                osc.stop(ctx.currentTime + 0.5);
+            }
+        } catch (e) { }
+    }
+
+    // --- Matrix Rain Logic ---
+    function startMatrixRain() {
+        const ctx = canvas.getContext('2d');
+
+        const resizeCanvas = () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        };
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%^&*";
+        const fontSize = 14;
+        const columns = Math.ceil(canvas.width / fontSize);
+        const drops = Array(columns).fill(1).map(() => Math.random() * -100);
+
+        function draw() {
+            // Fade effect
+            ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            ctx.fillStyle = "#39FF14"; // Matrix Green
+            ctx.font = fontSize + "px monospace";
+
+            for (let i = 0; i < drops.length; i++) {
+                const text = letters[Math.floor(Math.random() * letters.length)];
+                const x = i * fontSize;
+                const y = drops[i] * fontSize;
+
+                ctx.fillText(text, x, y);
+
+                if (y > canvas.height && Math.random() > 0.975) {
+                    drops[i] = 0;
+                }
+                drops[i]++;
+            }
+        }
+        matrixInterval = setInterval(draw, 33);
+    }
+
+    function stopMatrixRain() {
+        if (matrixInterval) clearInterval(matrixInterval);
+        const ctx = canvas.getContext('2d');
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+    }
+
+    // --- Gravity/Physics Logic (Matter.js) ---
+    function enablePhysics() {
+        const { Engine, Render, World, Bodies, Mouse, MouseConstraint, Runner } = Matter;
+
+        // 1. Setup Engine using chaos-ready settings
+        const engine = Engine.create();
+        engine.gravity.y = 1; // Normal gravity
+        physicsEngine = engine;
+
+        // 2. Setup Invisible Renderer for Mouse Interaction
+        const render = Render.create({
+            element: document.body,
+            engine: engine,
+            options: {
+                width: window.innerWidth,
+                height: window.innerHeight,
+                wireframes: false, // We don't want to see debug lines
+                background: 'transparent' // Important!
+            }
+        });
+
+        // Ensure the canvas sits above everything else but below the Exit button
+        render.canvas.style.position = 'fixed';
+        render.canvas.style.top = '0';
+        render.canvas.style.left = '0';
+        render.canvas.style.pointerEvents = 'auto'; // Capture mouse events
+        render.canvas.style.zIndex = '9999'; // Below Exit Button (10001) but above CRT overlay (9998)
+
+        // 3. Create Bodies from DOM Elements
+        // We select key UI cards to fall. Text falls are messy, so we stick to containers.
+        const selector = '.bento-card, .service-card, .contact-option, .skill-tag, h1, h2';
+        const elements = Array.from(document.querySelectorAll(selector));
+        const bodies = [];
+
+        elements.forEach(el => {
+            const rect = el.getBoundingClientRect();
+            // Skip elements not visible or too small
+            if (rect.width === 0 || rect.height === 0) return;
+
+            // Create physics body matching element dimensions & position
+            // Matter.js positions are center-based. 
+            // We add window.scrollY because rect.top is relative to viewport, but physics world is absolute.
+            const centerX = rect.left + rect.width / 2;
+            const centerY = rect.top + rect.height / 2 + window.scrollY;
+
+            const body = Bodies.rectangle(centerX, centerY, rect.width, rect.height, {
+                restitution: 0.6, // Bounciness
+                friction: 0.5,
+                density: 0.04,
+                angle: (Math.random() - 0.5) * 0.1 // Tiny random initial rotation
+            });
+
+            body.domElement = el; // Link back to DOM
+
+            // IMPORTANT: "Freeze" the visual element dimensions before we detach it from layout
+            el.style.width = `${rect.width}px`;
+            el.style.height = `${rect.height}px`;
+            // We will set position: fixed in the loop to start moving it
+
+            bodies.push(body);
+        });
+
+        // 4. Create Boundaries (Floor, Walls)
+        // Responsive boundaries relative to current scroll + viewport
+        // We make a "container" that encloses the current scroll height + viewport
+        const docHeight = Math.max(document.body.scrollHeight, document.body.offsetHeight);
+        const groundY = docHeight + 100;
+
+        const ground = Bodies.rectangle(window.innerWidth / 2, groundY, window.innerWidth * 2, 200, { isStatic: true });
+        const leftWall = Bodies.rectangle(-100, docHeight / 2, 200, docHeight * 5, { isStatic: true });
+        const rightWall = Bodies.rectangle(window.innerWidth + 100, docHeight / 2, 200, docHeight * 5, { isStatic: true });
+
+        // Add a "Ceiling" far up to prevent flying off into space too easily
+        const ceiling = Bodies.rectangle(window.innerWidth / 2, -2000, window.innerWidth * 2, 200, { isStatic: true });
+
+        World.add(engine.world, [ground, leftWall, rightWall, ceiling, ...bodies]);
+
+        // 5. Add Mouse Control
+        // This is tricky because the canvas is fixed/screenspace but bodies are worldspace.
+        // We need a mouse that tracks screen coordinates but interacts with the world.
+        const mouse = Mouse.create(render.canvas);
+        // Fix mouse offset for scrolling
+
+        const mouseConstraint = MouseConstraint.create(engine, {
+            mouse: mouse,
+            constraint: {
+                stiffness: 0.2, // Spring stiffness for dragging
+                render: { visible: false }
+            }
+        });
+        World.add(engine.world, mouseConstraint);
+
+        // 6. Run the Engine
+        const runner = Runner.create();
+        physicsRunner = runner;
+        Runner.run(runner, engine);
+
+        // 7. Sync Loop: Update DOM positions based on Physics World
+        function update() {
+            if (!physicsEngine) return;
+
+            // Update Mouse offset for current scroll
+            // Only strictly needed if we want to drag things while scrolling, 
+            // but scrolling is weird in gravity mode anyway.
+            Mouse.setOffset(mouse, { x: 0, y: window.scrollY });
+
+            bodies.forEach(body => {
+                const el = body.domElement;
+                if (el) {
+                    if (el.style.position !== 'absolute') {
+                        el.style.position = 'absolute';
+                        el.style.margin = '0';
+                        el.style.zIndex = '1000';
+                    }
+
+                    // Translate physics coordinates (center) to DOM coordinates (top-left)
+                    // Since we set position: absolute, coordinates are relative to the document (<html>)
+                    // Matter.js bodies are also generally working in "world space".
+
+                    const x = body.position.x - el.offsetWidth / 2;
+                    const y = body.position.y - el.offsetHeight / 2;
+
+                    el.style.transform = `translate(${x}px, ${y}px) rotate(${body.angle}rad)`;
+
+                    // Important: Reset top/left to 0 because transform handles everything
+                    el.style.top = '0';
+                    el.style.left = '0';
+                }
+            });
+
+            animationFrameId = requestAnimationFrame(update);
+        }
+        update();
+    }
+
+    // Keyboard Listener
+    document.addEventListener('keydown', (e) => {
+        keyHistory.push(e.key);
+        // Keep only as many keys as needed
+        if (keyHistory.length > konamiCode.length) {
+            keyHistory.shift();
+        }
+        if (JSON.stringify(keyHistory) === JSON.stringify(konamiCode)) {
+            toggleGodMode(true);
+            keyHistory = []; // Reset
+        }
+    });
+
+    // Touch/Swipe Listener
+    document.addEventListener('touchstart', (e) => {
+        touchStartX = e.changedTouches[0].screenX;
+        touchStartY = e.changedTouches[0].screenY;
+    }, { passive: true });
+
+    document.addEventListener('touchend', (e) => {
+        const touchEndX = e.changedTouches[0].screenX;
+        const touchEndY = e.changedTouches[0].screenY;
+
+        handleSwipe(touchStartX, touchStartY, touchEndX, touchEndY);
+    }, { passive: true });
+
+    function handleSwipe(startX, startY, endX, endY) {
+        const diffX = endX - startX;
+        const diffY = endY - startY;
+        const absX = Math.abs(diffX);
+        const absY = Math.abs(diffY);
+        const threshold = 50; // Min distance for swipe
+
+        if (Math.max(absX, absY) < threshold) return; // Tap, not swipe
+
+        let direction = "";
+        if (absX > absY) {
+            direction = diffX > 0 ? "Right" : "Left";
+        } else {
+            direction = diffY > 0 ? "Down" : "Up";
+        }
+
+        swipeHistory.push(direction);
+        if (swipeHistory.length > mobileKonami.length) {
+            swipeHistory.shift();
+        }
+
+        if (JSON.stringify(swipeHistory) === JSON.stringify(mobileKonami)) {
+            toggleGodMode(true);
+            swipeHistory = [];
+        }
     }
 });

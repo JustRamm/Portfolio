@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="neonGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#8B5CF6;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#00E5FF;stop-opacity:1" />
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="15" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  
+  <!-- Dark Background Container -->
+  <rect x="0" y="0" width="512" height="512" rx="100" fill="#0a0a0a" />
+  
+  <!-- Tech Pattern Background (Subtle) -->
+  <rect x="64" y="64" width="384" height="384" fill="none" class="bg-pattern" />
+  
+  <!-- The 'A' Monogram / Pixel Arrow Shape -->
+  <g transform="translate(256, 256) scale(0.85) translate(-256, -256)" filter="url(#glow)">
+    <!-- Main A Shape constructed from pixel-like blocks or geometric paths -->
+    <path d="M256 64 L64 448 L160 448 L256 256 L352 448 L448 448 Z" fill="url(#neonGrad)" opacity="0.9"/>
+    
+    <!-- Cutout for A legs -->
+    <path d="M256 160 L200 280 L312 280 Z" fill="#0a0a0a"/>
+    
+    <!-- Central Digital Dot/Node -->
+    <circle cx="256" cy="350" r="30" fill="#00E5FF"/>
+  </g>
+  
+  <!-- Border -->
+  <rect x="25" y="25" width="462" height="462" rx="80" fill="none" stroke="url(#neonGrad)" stroke-width="15" opacity="0.5"/>
+</svg>

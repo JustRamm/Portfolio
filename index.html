@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <title>Abiram T Bijoy | Portfolio</title>
@@ -12,25 +12,23 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Press+Start+2P&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="style.css">
-    <link rel="icon" type="image/jpeg" href="images/2.jpg">
-    <link rel="apple-touch-icon" href="images/2.jpg">
-    <style>
-        /* Override to make the layout wider */
-        /* Override to make the layout wider */
-        .container,
-        .hero-content,
-        .section-full-width {
-            max-width: 1600px;
-            margin-left: auto;
-            margin-right: auto;
-            /* Increased from the likely default (e.g., 1100px) */
-        }
+    <link rel="icon" type="image/svg+xml" href="images/favicon.svg">
+    <link rel="apple-touch-icon" href="images/favicon.svg">
+    <link rel="stylesheet" href="https://unpkg.com/github-calendar@latest/dist/github-calendar-responsive.css" />
 
-        /* Hero padding handled in CSS */
-    </style>
 </head>
 
 <body>
+    <!-- Splash Screen -->
+    <div id="splash-screen">
+        <div class="splash-content">
+            <div class="splash-logo">Abiram</div>
+            <p class="splash-text">Building the future...</p>
+            <div class="loading-bar">
+                <div class="progress"></div>
+            </div>
+        </div>
+    </div>
     <div id="waves-container"></div>
 
     <nav class="navbar">
@@ -45,11 +43,13 @@
         </button>
         <div class="nav-overlay"></div>
         <div class="nav-links">
-            <a href="#gallery">Gallery</a>
+            <a href="#about">About</a>
             <a href="#services">Services</a>
             <a href="#experience">Experience</a>
             <a href="#skills">Skills</a>
             <a href="#projects">Projects</a>
+            <a href="#gallery">Gallery</a>
+            <a href="#contact">Contact</a>
         </div>
     </nav>
 
@@ -57,12 +57,11 @@
         <div class="hero-content">
             <div class="badge">Available for hire</div>
             <h1 id="typing-text">Hi, I'm Abiram T Bijoy.<br>Building the future.</h1>
-            <p class="subtitle">A results-oriented, final-year Information Technology student at CUSAT. Eager to secure
-                a challenging entry-level position where I can apply my analytical and problem-solving skills to
-                contribute to innovative technological solutions.</p>
+
             <div class="cta-group">
                 <a href="#projects" class="btn btn-primary">View Projects</a>
-                <a href="#" id="download-resume-btn" class="btn btn-secondary">Download Resume</a>
+                <a href="images/resume.pdf" download id="static-resume-download" class="btn btn-secondary">Download
+                    Resume</a>
             </div>
         </div>
         <div class="hero-image">
@@ -71,124 +70,164 @@
                     <p>Anything in here will be replaced on browsers that support the canvas element</p>
                 </canvas>
             </div>
-            <div id="tags" style="display: none;">
+            <div id="tags">
                 <!-- Tags will be injected here via JS -->
             </div>
         </div>
     </header>
 
 
-    <section id="gallery" class="section">
+
+    <!-- About Section -->
+    <section id="about" class="section">
         <div class="container">
-            <h2 class="section-title">Gallery</h2>
+            <h2 class="section-title">About Me</h2>
         </div>
-        <div class="bento-grid fade-in">
-            <div class="bento-item main-item" data-image="images/8.jpg">
-                <img src="images/8.jpg" alt="Abiram T Bijoy" loading="lazy">
-                <div class="bento-overlay">
-                    <span>Me</span>
+        <div class="about-content">
+            <div class="about-text fade-in">
+                <p class="lead">
+                    Hi, I’m Abiram. On paper, I’m a final-year B.Tech Information Technology student. In practice, I’m a
+                    builder who refuses to choose between "making it work" and "making it feel good."
+                </p>
+                <p>
+                    I sit right at the intersection where code meets creativity. Whether I’m scripting immersive
+                    mechanics for a game, training intelligent AI agents, or architecting a full-stack app, my goal is
+                    always the same: <strong>The Experience.</strong>
+                </p>
+                <p>
+                    I believe the best software doesn't just solve a problem—it tells a story. I bring a product mindset
+                    to engineering, meaning I care just as much about the user journey and pixel-perfect design as I do
+                    about clean architecture and efficient algorithms.
+                </p>
+                <p>
+                    If you’re looking for a developer who speaks fluent "Engineer" but thinks like a "Creator," let’s
+                    talk.
+                </p>
+
+                <!-- GitHub Contribution Graph -->
+                <div class="github-calendar-wrapper fade-in delay-500">
+                    <div class="calendar">
+                        <!-- Loading stuff -->
+                        <div class="loading-calendar">
+                            <div class="spinner"></div>
+                            <p>Harvesting GitHub data for JustRamm...</p>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="bento-item gradient-1" data-image="images/2.jpg">
-                <img src="images/2.jpg" alt="Abiram T Bijoy" loading="lazy">
-            </div>
-            <div class="bento-item gradient-2" data-image="images/3.jpg">
-                <img src="images/3.jpg" alt="Abiram T Bijoy" loading="lazy">
-            </div>
-            <div class="bento-item wide-item gradient-3" data-image="images/9.jpg">
-                <img src="images/9.jpg" alt="Abiram T Bijoy" loading="lazy">
-            </div>
-            <div class="bento-item wide-item gradient-4" data-image="images/12.jpg">
-                <img src="images/12.jpg" alt="Abiram T Bijoy" loading="lazy">
-            </div>
-            <div class="bento-item wide-item gradient-5" data-image="images/6.jpg">
-                <img src="images/6.jpg" alt="Abiram T Bijoy" loading="lazy">
-            </div>
-            <div class="bento-item gradient-6" data-image="images/4.jpg">
-                <img src="images/4.jpg" alt="Abiram T Bijoy" loading="lazy">
-            </div>
-            <div class="bento-item gradient-7" data-image="images/1.jpg">
-                <img src="images/1.jpg" alt="Abiram T Bijoy" loading="lazy">
-            </div>
-            <div class="bento-item gradient-8" data-image="images/7.jpg">
-                <img src="images/7.jpg" alt="Abiram T Bijoy" loading="lazy">
-            </div>
-            <div class="bento-item wide-item gradient-9" data-image="images/10.jpg">
-                <img src="images/10.jpg" alt="Abiram T Bijoy" loading="lazy">
+            <div class="container">
+                <div class="education-card fade-in delay-200">
+                    <h3>🎓 Education</h3>
+                    <div class="edu-item">
+                        <div class="edu-year">2021 - 2025 (Present)</div>
+                        <div class="edu-details">
+                            <h4>B.Tech in Information Technology</h4>
+                            <span class="edu-place">School of Engineering, CUSAT</span>
+                            <p class="edu-desc">Specializing in Full Stack Development and AI integration. Active member
+                                of tech clubs and hackathon teams.</p>
+                        </div>
+                    </div>
+                    <div class="edu-item">
+                        <div class="edu-year">2019 - 2021</div>
+                        <div class="edu-details">
+                            <h4>Higher Secondary (Computer Science)</h4>
+                            <span class="edu-place">St. Jude Public School, Kuttanellur, Thrissur</span>
+                            <p class="edu-desc">Laid the foundation for programming and logic building.</p>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- Image Modal -->
-    <div id="image-modal" class="modal">
-        <span class="close-modal">&times;</span>
-        <img class="modal-content" id="modal-img">
-        <div id="caption"></div>
-    </div>
 
-    <!-- Resume Builder Modal -->
-    <div id="resume-modal" class="modal"
-        style="display: none; align-items: flex-start; padding-top: 50px; overflow-y: auto;">
-        <div class="modal-content"
-            style="background: #1a1a1a; padding: 2rem; width: 100%; max-width: 600px; transform: scale(1); border: 1px solid var(--border-color); color: white;">
-            <span class="close-resume-modal" style="float: right; cursor: pointer; font-size: 1.5rem;">&times;</span>
-            <h2 style="margin-bottom: 1rem; color: var(--primary-color);">Resume Builder</h2>
-            <p style="font-size: 0.9rem; margin-bottom: 1.5rem; color: #ccc;">Paste the Job Description to automatically
-                highlight relevant skills and projects for an ATS-friendly result.</p>
 
-            <div style="margin-bottom: 1.5rem;">
-                <label style="display: block; margin-bottom: 0.5rem; font-weight: 600;">Job Description
-                    (Optional)</label>
-                <textarea id="job-description-input" rows="6"
-                    style="width: 100%; padding: 0.75rem; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); color: white; border-radius: 8px; resize: vertical;"
-                    placeholder="Paste text here..."></textarea>
-            </div>
 
-            <div id="skill-selector-container" style="display: none; margin-bottom: 1.5rem;">
-                <h3 style="font-size: 1.1rem; margin-bottom: 0.5rem;">Select Skills</h3>
-                <div id="skill-checkboxes"
-                    style="display: flex; flex-wrap: wrap; gap: 0.5rem; max-height: 200px; overflow-y: auto; padding: 0.5rem; border: 1px solid rgba(255,255,255,0.1); border-radius: 8px;">
-                    <!-- Checkboxes injected via JS -->
-                </div>
-            </div>
-
-            <div style="display: flex; gap: 1rem; justify-content: flex-end; margin-top: 2rem;">
-                <button id="btn-download-generic" class="btn btn-secondary" style="font-size: 0.9rem;">Skip & Download
-                    Generic</button>
-                <button id="btn-analyze-resume" class="btn btn-primary" style="font-size: 0.9rem;">Analyze &
-                    Download</button>
-            </div>
-        </div>
-    </div>
 
     <section id="services" class="section">
         <div class="container">
             <h2 class="section-title">What I Do</h2>
             <div class="services-grid">
                 <div class="service-card fade-in">
-                    <div class="service-icon">💻</div>
+                    <img src="images/web-dev.svg" alt="Web Development" class="service-icon-img">
                     <h3>Full Stack Development</h3>
                     <p>Building robust web applications using React, Node.js, and Modern PHP.</p>
                 </div>
                 <div class="service-card fade-in delay-100">
-                    <div class="service-icon">📱</div>
+                    <img src="images/mobile-dev.svg" alt="Mobile Development" class="service-icon-img">
                     <h3>Mobile Development</h3>
                     <p>Creating cross-platform mobile experiences with Flutter and Dart.</p>
                 </div>
-                <div class="service-card fade-in delay-200">
-                    <div class="service-icon">🤖</div>
-                    <h3>AI Integration</h3>
-                    <p>Implementing generative AI solutions and smart automation.</p>
-                </div>
                 <div class="service-card fade-in delay-300">
-                    <div class="service-icon">🎨</div>
+                    <img src="images/ui-ux.svg" alt="UI/UX Design" class="service-icon-img">
                     <h3>UI/UX Design</h3>
                     <p>Designing intuitive interfaces with Figma and user-centric principles.</p>
                 </div>
                 <div class="service-card fade-in delay-400">
-                    <div class="service-icon">🎮</div>
+                    <img src="images/game-dev.svg" alt="Game Development" class="service-icon-img">
                     <h3>Game Development</h3>
                     <p>Crafting immersive games with Unity and creating 3D assets with Blender.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- My Workflow Section -->
+    <section id="workflow" class="section">
+        <div class="container">
+            <h2 class="section-title">My Workflow</h2>
+            <div class="workflow-grid">
+                <!-- Step 1 -->
+                <div class="workflow-card fade-in">
+                    <div class="workflow-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="11" cy="11" r="8"></circle>
+                            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                        </svg>
+                    </div>
+                    <div class="workflow-step">01</div>
+                    <h3>Discover</h3>
+                    <p>Understanding the core problem, user needs, and defining the scope. Research is key.</p>
+                </div>
+                <!-- Step 2 -->
+                <div class="workflow-card fade-in delay-100">
+                    <div class="workflow-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                            <line x1="3" y1="9" x2="21" y2="9"></line>
+                            <line x1="9" y1="21" x2="9" y2="9"></line>
+                        </svg>
+                    </div>
+                    <div class="workflow-step">02</div>
+                    <h3>Design</h3>
+                    <p>Wireframing, prototyping in Figma, and architectural planning for scalable systems.</p>
+                </div>
+                <!-- Step 3 -->
+                <div class="workflow-card fade-in delay-200">
+                    <div class="workflow-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="16 18 22 12 16 6"></polyline>
+                            <polyline points="8 6 2 12 8 18"></polyline>
+                        </svg>
+                    </div>
+                    <div class="workflow-step">03</div>
+                    <h3>Develop</h3>
+                    <p>Writing clean, efficient code. Integrating APIs, databases, and robust logic.</p>
+                </div>
+                <!-- Step 4 -->
+                <div class="workflow-card fade-in delay-300">
+                    <div class="workflow-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+                        </svg>
+                    </div>
+                    <div class="workflow-step">04</div>
+                    <h3>Launch</h3>
+                    <p>Testing, deployment (CI/CD), and monitoring. Delivering the final product.</p>
                 </div>
             </div>
         </div>
@@ -335,16 +374,74 @@
         </div>
         <div class="section-full-width">
             <div class="bento-card-grid">
+                <!-- Stickman to the Rescue (Featured) -->
+                <a href="https://stickman-to-the-rescue.vercel.app/" target="_blank" rel="noopener noreferrer"
+                    class="bento-card bento-col-span-3 slide-up bento-card-featured">
+                    <div class="bento-card-bg bento-card-bg-visible">
+                        <img src="images/project/Stickman/1.png" alt="Stickman to the Rescue" class="bento-bg-img">
+                        <div class="bento-card-bg-pattern"></div>
+                    </div>
+                    <div class="bento-card-content">
+                        <div class="bento-card-header">
+                            <div class="bento-icon-box bento-icon-featured">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <path d="M22 12h-4l-3 9L9 3l-3 9H2" />
+                                </svg>
+                            </div>
+                            <span class="bento-status bento-status-featured">Latest</span>
+                        </div>
+                        <div>
+                            <div class="bento-title bento-title-lg">Stickman to the Rescue</div>
+                            <p class="bento-description bento-desc-lg"><strong>Gamified Mental Health
+                                    Training</strong><br>
+                                An interactive serious game simulator teaching the QPR (Question, Persuade, Refer)
+                                suicide
+                                prevention method. Features branching narratives, voice interactions, and mini-games.
+                                <br>
+                                <span class="game-disclaimer">Disclaimer: Only play on desktop or
+                                    laptop for ease of game play.</span>
+                            </p>
+                        </div>
+                        <div class="project-image-gallery">
+                            <div class="image-block"><img src="images/project/Stickman/1.png" alt="Stickman 1"></div>
+                            <div class="image-block"><img src="images/project/Stickman/2.png" alt="Stickman 2"></div>
+                            <div class="image-block"><img src="images/project/Stickman/3.png" alt="Stickman 3"></div>
+                            <div class="image-block"><img src="images/project/Stickman/4.png" alt="Stickman 4"></div>
+                            <div class="image-block"><img src="images/project/Stickman/5.png" alt="Stickman 5"></div>
+                            <div class="image-block"><img src="images/project/Stickman/6.png" alt="Stickman 6"></div>
+                            <div class="image-block"><img src="images/project/Stickman/7.png" alt="Stickman 7"></div>
+                            <div class="image-block"><img src="images/project/Stickman/8.png" alt="Stickman 8"></div>
+                            <div class="image-block"><img src="images/project/Stickman/9.png" alt="Stickman 9"></div>
+                            <div class="image-block"><img src="images/project/Stickman/10.png" alt="Stickman 10"></div>
+                            <div class="image-block"><img src="images/project/Stickman/11.png" alt="Stickman 11"></div>
+                            <div class="image-block"><img src="images/project/Stickman/12.jpeg" alt="Stickman 12"></div>
+                            <div class="image-block"><img src="images/project/Stickman/13.jpeg" alt="Stickman 13"></div>
+                            <div class="image-block"><img src="images/project/Stickman/14.jpeg" alt="Stickman 14"></div>
+                            <div class="image-block"><img src="images/project/Stickman/15.jpeg" alt="Stickman 15"></div>
+                            <div class="image-block"><img src="images/project/Stickman/16.jpeg" alt="Stickman 16"></div>
+                        </div>
+                        <div class="bento-footer">
+                            <div class="bento-tags">
+                                <span class="bento-tag">#React</span>
+                                <span class="bento-tag">#PWA</span>
+                                <span class="bento-tag">#Tailwind</span>
+                                <span class="bento-tag">#WebAudio</span>
+                            </div>
+                            <span class="bento-cta">Play Game &rarr;</span>
+                        </div>
+                    </div>
+                </a>
+
                 <!-- The Curious Case of the Missing Job (Featured) -->
-                <div class="bento-card bento-col-span-2 slide-up"
-                    style="border-color: var(--primary-color); box-shadow: 0 0 30px rgba(139, 92, 246, 0.15);">
+                <div class="bento-card bento-col-span-2 slide-up bento-card-featured">
                     <div class="bento-card-bg">
                         <div class="bento-card-bg-pattern"></div>
                     </div>
                     <div class="bento-card-content">
                         <div class="bento-card-header">
-                            <div class="bento-icon-box"
-                                style="background: rgba(139, 92, 246, 0.2); color: var(--primary-color);">
+                            <div class="bento-icon-box bento-icon-featured">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
                                     fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                                     stroke-linejoin="round">
@@ -353,13 +450,12 @@
                                     </polygon>
                                 </svg>
                             </div>
-                            <span class="bento-status"
-                                style="background: var(--primary-color); color: white;">Featured</span>
+                            <span class="bento-status bento-status-featured">Featured</span>
                         </div>
                         <div>
-                            <div class="bento-title" style="font-size: 1.5rem;">The Curious Case of the Missing Job
+                            <div class="bento-title bento-title-lg">The Curious Case of the Missing Job
                             </div>
-                            <p class="bento-description" style="font-size: 1rem; line-height: 1.6;"><strong>"Placement
+                            <p class="bento-description bento-desc-lg"><strong>"Placement
                                     prep is stressful. We turned it into a game."</strong><br>
                                 A 3D escape-room simulation built in Unity where you solve your way to a job offer.
                                 Instead of static PDF question banks, players explore a virtual IT department, solving
@@ -367,15 +463,17 @@
                             </p>
                         </div>
                         <div class="project-image-gallery">
-                            <div class="image-block"><img src="images/project/TCCOMJ/2.jpeg" alt="TCCOMJ Gameplay 1">
+                            <div class="image-block"><img src="images/project/TCCOMJ/1.jpeg" alt="TCCOMJ Gameplay 1">
                             </div>
-                            <div class="image-block"><img src="images/project/TCCOMJ/3.jpeg" alt="TCCOMJ Gameplay 2">
+                            <div class="image-block"><img src="images/project/TCCOMJ/2.jpeg" alt="TCCOMJ Gameplay 2">
                             </div>
-                            <div class="image-block"><img src="images/project/TCCOMJ/4.jpeg" alt="TCCOMJ Gameplay 3">
+                            <div class="image-block"><img src="images/project/TCCOMJ/3.jpeg" alt="TCCOMJ Gameplay 3">
                             </div>
-                            <div class="image-block"><img src="images/project/TCCOMJ/5.jpeg" alt="TCCOMJ Gameplay 4">
+                            <div class="image-block"><img src="images/project/TCCOMJ/4.jpeg" alt="TCCOMJ Gameplay 4">
                             </div>
-                            <div class="image-block"><img src="images/project/TCCOMJ/6.jpeg" alt="TCCOMJ Gameplay 5">
+                            <div class="image-block"><img src="images/project/TCCOMJ/5.jpeg" alt="TCCOMJ Gameplay 5">
+                            </div>
+                            <div class="image-block"><img src="images/project/TCCOMJ/6.jpeg" alt="TCCOMJ Gameplay 6">
                             </div>
                         </div>
                         <div class="bento-footer">
@@ -391,18 +489,16 @@
                 </div>
 
                 <!-- N.E.X.T. -->
-                <a href="https://next-app-lake-nu.vercel.app/" target="_blank"
+                <a href="https://next-app-lake-nu.vercel.app/" target="_blank" rel="noopener noreferrer"
                     class="bento-card bento-col-span-1 slide-up">
-                    <div class="bento-card-bg" style="opacity: 1;">
-                        <img src="images/project/next.png" alt="N.E.X.T. Project"
-                            style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.2;">
+                    <div class="bento-card-bg bento-card-bg-visible">
+                        <img src="images/project/next.png" alt="N.E.X.T. Project" class="bento-bg-img">
                         <div class="bento-card-bg-pattern"></div>
                     </div>
                     <div class="bento-card-content">
                         <div class="bento-card-header">
-                            <div class="bento-icon-box" style="padding: 0; overflow: hidden; background: transparent;">
-                                <img src="images/project/next.png" alt="N.E.X.T. Logo"
-                                    style="width: 100%; height: 100%; object-fit: contain;">
+                            <div class="bento-icon-box bento-icon-transparent">
+                                <img src="images/project/next.png" alt="N.E.X.T. Logo" class="bento-icon-img">
                             </div>
                             <span class="bento-status">Live</span>
                         </div>
@@ -434,8 +530,66 @@
                     </div>
                 </a>
 
+                <!-- Dhriti -->
+                <a href="https://dhrithi.vercel.app/" target="_blank" rel="noopener noreferrer"
+                    class="bento-card bento-col-span-2 slide-up">
+                    <div class="bento-card-bg bento-card-bg-visible">
+                        <img src="images/project/Dhriti/1.png" alt="Dhriti Project" class="bento-bg-img">
+                        <div class="bento-card-bg-pattern"></div>
+                    </div>
+                    <div class="bento-card-content">
+                        <div class="bento-card-header">
+                            <div class="bento-icon-box bento-icon-transparent">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <path
+                                        d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z">
+                                    </path>
+                                    <path d="M3.22 12H9.5l.5-1 2 4.5 2-7 1.5 3.5h5.27"></path>
+                                </svg>
+                            </div>
+                            <span class="bento-status">Live</span>
+                        </div>
+                        <div>
+                            <div class="bento-title">Dhriti</div>
+                            <p class="bento-description"><strong>Mental Health Festival Platform</strong><br>Designed
+                                and
+                                developed the official website for Kerala's first community-led mental health festival.
+                                Features immersive parallax scrolling, responsive event showcase, and motion-driven
+                                storytelling. Built with performance and accessibility in mind using modern React
+                                patterns.</p>
+                        </div>
+                        <div class="project-image-gallery">
+                            <div class="image-block"><img src="images/project/Dhriti/1.png" alt="Dhriti 1"></div>
+                            <div class="image-block"><img src="images/project/Dhriti/2.png" alt="Dhriti 2"></div>
+                            <div class="image-block"><img src="images/project/Dhriti/3.png" alt="Dhriti 3"></div>
+                            <div class="image-block"><img src="images/project/Dhriti/4.png" alt="Dhriti 4"></div>
+                            <div class="image-block"><img src="images/project/Dhriti/5.png" alt="Dhriti 5"></div>
+                            <div class="image-block"><img src="images/project/Dhriti/6.png" alt="Dhriti 6"></div>
+                            <div class="image-block"><img src="images/project/Dhriti/7.png" alt="Dhriti 7"></div>
+                            <div class="image-block"><img src="images/project/Dhriti/8.png" alt="Dhriti 8"></div>
+                            <div class="image-block"><img src="images/project/Dhriti/9.png" alt="Dhriti 9"></div>
+                            <div class="image-block"><img src="images/project/Dhriti/10.png" alt="Dhriti 10"></div>
+                            <div class="image-block"><img src="images/project/Dhriti/11.png" alt="Dhriti 11"></div>
+                            <div class="image-block"><img src="images/project/Dhriti/12.png" alt="Dhriti 12"></div>
+                        </div>
+                        <div class="bento-footer">
+                            <div class="bento-tags">
+                                <span class="bento-tag">#React</span>
+                                <span class="bento-tag">#TypeScript</span>
+                                <span class="bento-tag">#Tailwind</span>
+                                <span class="bento-tag">#Framer</span>
+                            </div>
+                            <span class="bento-cta">Visit Site &rarr;</span>
+                        </div>
+                    </div>
+                </a>
+
+
+
                 <!-- SAIT Placement Portal -->
-                <a href="https://sait-placement-portal.vercel.app/" target="_blank"
+                <a href="https://sait-placement-portal.vercel.app/" target="_blank" rel="noopener noreferrer"
                     class="bento-card bento-col-span-1 slide-up delay-100">
                     <div class="bento-card-bg">
                         <div class="bento-card-bg-pattern"></div>
@@ -698,49 +852,142 @@
         </div>
     </section>
 
-    <footer class="footer">
+
+
+
+
+    <section id="gallery" class="section">
         <div class="container">
-            <div class="footer-content">
-                <div class="logo">Abiram T Bijoy</div>
-                <div class="footer-dock">
-                    <a href="https://instagram.com" target="_blank" class="dock-item" aria-label="Instagram">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <h2 class="section-title">Gallery</h2>
+        </div>
+        <div class="bento-grid fade-in">
+            <div class="bento-item main-item" data-image="images/gallery/8.jpg">
+                <img src="images/gallery/8.jpg" alt="Abiram T Bijoy" loading="lazy">
+                <div class="bento-overlay">
+                    <span>Me</span>
+                </div>
+            </div>
+            <div class="bento-item gradient-1" data-image="images/gallery/2.jpg">
+                <img src="images/gallery/2.jpg" alt="Abiram T Bijoy" loading="lazy">
+            </div>
+            <div class="bento-item gradient-2" data-image="images/gallery/3.jpg">
+                <img src="images/gallery/3.jpg" alt="Abiram T Bijoy" loading="lazy">
+            </div>
+            <div class="bento-item wide-item gradient-3" data-image="images/gallery/9.jpg">
+                <img src="images/gallery/9.jpg" alt="Abiram T Bijoy" loading="lazy">
+            </div>
+            <div class="bento-item wide-item gradient-4" data-image="images/gallery/12.jpg">
+                <img src="images/gallery/12.jpg" alt="Abiram T Bijoy" loading="lazy">
+            </div>
+            <div class="bento-item wide-item gradient-5" data-image="images/gallery/6.jpg">
+                <img src="images/gallery/6.jpg" alt="Abiram T Bijoy" loading="lazy">
+            </div>
+            <div class="bento-item gradient-6" data-image="images/gallery/4.jpg">
+                <img src="images/gallery/4.jpg" alt="Abiram T Bijoy" loading="lazy">
+            </div>
+            <div class="bento-item gradient-7" data-image="images/gallery/1.jpg">
+                <img src="images/gallery/1.jpg" alt="Abiram T Bijoy" loading="lazy">
+            </div>
+            <div class="bento-item gradient-8" data-image="images/gallery/7.jpg">
+                <img src="images/gallery/7.jpg" alt="Abiram T Bijoy" loading="lazy">
+            </div>
+            <div class="bento-item wide-item gradient-9" data-image="images/gallery/10.jpg">
+                <img src="images/gallery/10.jpg" alt="Abiram T Bijoy" loading="lazy">
+            </div>
+        </div>
+    </section>
+
+    <!-- Image Modal -->
+    <div id="image-modal" class="modal">
+        <span class="close-modal">&times;</span>
+        <img class="modal-content" id="modal-img" alt="Expanded View">
+        <div id="caption"></div>
+    </div>
+
+    <!-- Corrected Contact Section -->
+    <section id="contact" class="section">
+        <div class="container">
+            <h2 class="section-title">Contact Me <span class="accent-dot">.</span></h2>
+            <div class="contact-wrapper fade-in">
+                <p class="contact-desc">
+                    I'm currently looking for new opportunities. Whether you have a question or just want to say hi,
+                    I'll
+                    try my best to get back to you!
+                </p>
+
+                <div class="contact-card">
+                    <a href="mailto:abirambijoy@gmail.com" class="contact-option">
+                        <div class="contact-icon-box">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z">
+                                </path>
+                                <polyline points="22,6 12,13 2,6"></polyline>
+                            </svg>
+                        </div>
+                        <span class="contact-text">abirambijoy@gmail.com</span>
+                    </a>
+
+                    <a href="https://wa.me/9061892761" target="_blank" rel="noopener noreferrer" class="contact-option">
+                        <div class="contact-icon-box">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <path
+                                    d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z">
+                                </path>
+                            </svg>
+                        </div>
+                        <span class="contact-text">+91 9061892761</span>
+                    </a>
+                </div>
+
+                <div class="social-links-grid">
+                    <a href="https://www.instagram.com/_iiim.ram_?igsh=dzlsZnpyampqNjd2" target="_blank"
+                        rel="noopener noreferrer" class="social-btn" aria-label="Instagram">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
                             <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
                             <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
                         </svg>
                     </a>
-                    <a href="https://github.com/JustRamm" target="_blank" class="dock-item" aria-label="GitHub">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <a href="https://github.com/JustRamm" target="_blank" rel="noopener noreferrer" class="social-btn"
+                        aria-label="GitHub">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <path
                                 d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22">
                             </path>
                         </svg>
                     </a>
-                    <a href="https://www.linkedin.com/in/abiram-t-bijoy/" target="_blank" class="dock-item"
-                        aria-label="LinkedIn">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <a href="https://www.linkedin.com/in/abiram-t-bijoy" target="_blank" rel="noopener noreferrer"
+                        class="social-btn" aria-label="LinkedIn">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z">
                             </path>
                             <rect x="2" y="9" width="4" height="12"></rect>
                             <circle cx="4" cy="4" r="2"></circle>
                         </svg>
                     </a>
-                    <a href="https://wa.me/9061892761" target="_blank" class="dock-item" aria-label="WhatsApp">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path
-                                d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z">
-                            </path>
-                        </svg>
-                    </a>
                 </div>
             </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="logo">Abiram T Bijoy</div>
+            </div>
             <div class="copyright">
-                &copy; 2024 Abiram T Bijoy. Theme inspired by Jules.
+                &copy; Abiram T Bijoy.
+                <span class="konami-hint" title="Try typing this sequence!">
+                    <span class="desktop-hint">↑↑↓↓←→←→BA</span>
+                    <span class="mobile-hint">Tap 'Abiram' 5x</span>
+                </span>
             </div>
         </div>
     </footer>
@@ -763,9 +1010,57 @@
             pointerSize: 0.5
         });
     </script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-    <script src="resume-data.js"></script> <!-- Data file -->
-    <script src="resume-generator.js"></script> <!-- Generator Logic -->
+
+    <script src="https://unpkg.com/github-calendar@latest/dist/github-calendar.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            if (typeof GitHubCalendar === 'function') {
+                // Use a reliable proxy to fetch contribution data
+                GitHubCalendar(".calendar", "JustRamm", {
+                    responsive: true,
+                    tooltips: true,
+                    proxy: (username) => {
+                        return fetch(`https://api.blogg.li/github/calendar/${username}`)
+                            .then(res => res.text());
+                    }
+                }).then(() => {
+                    // 1. Force hide EVERYTHING except the first column (Total Contributions)
+                    const columns = document.querySelectorAll('.contrib-column');
+                    columns.forEach((col, index) => {
+                        if (index > 0) {
+                            col.style.setProperty('display', 'none', 'important');
+                        }
+                    });
+
+                    // 2. Remove any text containing "streak", "rock", or "hard place" just in case
+                    const allElements = document.querySelectorAll('.calendar *');
+                    allElements.forEach(el => {
+                        if (el.children.length === 0) {
+                            const text = el.innerText.toLowerCase();
+                            if (text.includes('streak') || text.includes('rock') || text.includes('hard place')) {
+                                el.style.display = 'none';
+                            }
+                        }
+                    });
+
+                    // 3. Fix the "0 total" issue with a reliable fallback
+                    const totalElem = document.querySelector('.contrib-number');
+                    fetch('https://github-contributions-api.deno.dev/JustRamm.json')
+                        .then(res => res.json())
+                        .then(data => {
+                            if (data.totalContributions > 0 && totalElem) {
+                                // Update with real data and big font
+                                totalElem.innerText = data.totalContributions + ' total contributions';
+                                totalElem.style.fontSize = '1.5rem';
+                            }
+                        })
+                        .catch(err => console.error("Fallback fetch failed:", err));
+                }).catch(err => {
+                    console.error("GitHub Calendar failed to load:", err);
+                });
+            }
+        });
+    </script>
     <script src="tagcanvas.min.js"></script>
     <script src="script.js"></script>
 </body>
