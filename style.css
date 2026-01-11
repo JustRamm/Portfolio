@@ -3380,6 +3380,9 @@ body.god-mode #god-mode-exit {
     body.god-mode .workflow-card {
         padding: 1rem !important;
         min-height: auto !important;
+        width: 160px !important;
+        /* Smaller cards for mobile shatter */
+        max-width: 45vw !important;
     }
 
     body.god-mode .btn {
