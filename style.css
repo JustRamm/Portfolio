@@ -3124,31 +3124,43 @@ body.god-mode #god-mode-exit {
         padding: 2.5rem 1.5rem;
     }
 
-    .education-card,
     .about-text {
         padding: 2.5rem 1.5rem;
+        display: flex !important;
+        flex-direction: row !important;
+        overflow-x: auto !important;
+        scroll-snap-type: x mandatory !important;
+        gap: 2rem !important;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+        /* Hide scrollbar for cleaner look */
     }
 
-    .behind-the-code-card h3 {
-        font-size: 1.75rem;
+    .about-text::-webkit-scrollbar {
+        display: none;
     }
 
     .about-text p,
     .about-text .github-calendar-wrapper {
+        flex: 0 0 92%;
+        /* Each block takes most of the width */
+        scroll-snap-align: center;
         margin-left: 0;
         width: 100%;
         padding: 0;
+        margin-bottom: 0 !important;
     }
 
     .calendar {
-        font-size: 12px;
-        min-height: 100px;
+        font-size: 11px;
+        min-height: 120px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
 
-    .calendar .contrib-number {
-        font-size: 1.2rem !important;
-        display: block;
-        text-align: center;
+    .behind-the-code-card h3 {
+        font-size: 1.75rem;
     }
 }
 
