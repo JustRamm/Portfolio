@@ -3089,6 +3089,34 @@ body.god-mode #god-mode-exit {
     margin-bottom: 0.25rem;
 }
 
+/* --- Emoji Replacement Icons --- */
+.emoji-svg {
+    width: 24px;
+    height: 24px;
+}
+
+.btc-extra-icon .emoji-svg {
+    width: 22px;
+    height: 22px;
+}
+
+.header-emoji {
+    display: inline-block;
+    vertical-align: middle;
+    width: 2.2rem;
+    height: 2.2rem;
+    margin-right: 0.75rem;
+    margin-top: -6px;
+}
+
+.toast-emoji {
+    width: 28px;
+    height: 28px;
+    vertical-align: middle;
+    margin-right: 12px;
+    filter: drop-shadow(0 0 8px #39FF14);
+}
+
 @media (max-width: 768px) {
     .behind-the-code-card {
         padding: 2.5rem 1.5rem;

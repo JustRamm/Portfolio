@@ -384,7 +384,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Create UI Elements
     const toast = document.createElement('div');
     toast.id = "god-mode-toast";
-    toast.innerHTML = "🏆 GOD MODE ACTIVATED<br>SYSTEM COMPROMISED";
+    toast.innerHTML = '<img src="images/icons/trophy.svg" alt="Trophy" class="toast-emoji"> GOD MODE ACTIVATED<br>SYSTEM COMPROMISED';
     document.body.appendChild(toast);
 
     const exitBtn = document.createElement('button');
