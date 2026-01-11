@@ -240,8 +240,8 @@ a {
 
 
 .hero-content {
-    flex: 1;
-    max-width: 600px;
+    flex: 1.5;
+    max-width: 900px;
 }
 
 .badge {
@@ -258,14 +258,17 @@ a {
 }
 
 .hero-title {
-    font-size: 4rem;
+    font-size: 4.5rem;
     font-weight: 800;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.75rem;
     line-height: 1.1;
-    background: linear-gradient(to right, #fff, #a0a0a0);
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
+    color: #FFFFFF;
+    white-space: nowrap;
+    /* Force single line */
+}
+
+.hero-title span {
+    color: var(--primary-color);
 }
 
 .hero-tagline {
