@@ -406,9 +406,11 @@ document.addEventListener('DOMContentLoaded', () => {
             // 1. Start Matrix Rain
             startMatrixRain();
 
-            // 2. Hide tagline if needed (messy in physics)
+            // 2. Hide clutter and background effects
             const tagline = document.getElementById('typing-text');
             if (tagline) tagline.style.opacity = '0';
+            const waves = document.getElementById('waves-container');
+            if (waves) waves.style.display = 'none';
 
             // 3. Start Gravity Physics (Matter.js)
             if (!window.Matter) {
@@ -438,6 +440,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function stopGodModeEffects() {
         document.body.style.height = '';
+        const waves = document.getElementById('waves-container');
+        if (waves) waves.style.display = '';
         if (physicsEngine) {
             Matter.World.clear(physicsEngine.world);
             Matter.Engine.clear(physicsEngine);
@@ -571,7 +575,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // 3. Create Bodies from DOM Elements
         // We select key UI cards to fall. Text falls are messy, so we stick to containers.
-        const selector = '.bento-card, .service-card, .contact-option, .skill-tag, h1, h2, h3, .education-card, .about-text, .behind-the-code-card, .workflow-card, .github-calendar-wrapper, .badge, .cta-group .btn';
+        // Select all significant content blocks, including paragraphs, lists, and section headers
+        const selector = '.bento-card, .service-card, .contact-option, .skill-tag, h1, h2, h3, h4, .education-card, .about-text, .behind-the-code-card, .workflow-card, .github-calendar-wrapper, .badge, .btn, p, .edu-item, .btc-extra-item, .github-stats-img, .bento-item, .footer-dock, .copyright';
         const elements = Array.from(document.querySelectorAll(selector));
         const bodies = [];
 
