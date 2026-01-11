@@ -575,9 +575,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // 3. Create Bodies from DOM Elements
         // We select key UI cards to fall. Text falls are messy, so we stick to containers.
-        // Select all significant content blocks, including paragraphs, lists, and section headers
-        const selector = '.bento-card, .service-card, .contact-option, .skill-tag, h1, h2, h3, h4, .education-card, .about-text, .behind-the-code-card, .workflow-card, .github-calendar-wrapper, .badge, .btn, p, .edu-item, .btc-extra-item, .github-stats-img, .bento-item, .footer-dock, .copyright';
-        const elements = Array.from(document.querySelectorAll(selector));
+        // Select all significant content blocks, including all headings, buttons, images, and containers
+        const selector = 'h1, h2, h3, h4, h5, h6, .btn, .badge, .logo, .nav-links a, p, img, .card, .bento-card, .service-card, .education-card, .workflow-card, .behind-the-code-card, .about-text, .edu-item, .btc-extra-item, .github-calendar-wrapper, .github-stats-img, .bento-item, .skill-tag, .footer-dock, .copyright, .contact-item';
+        const elements = Array.from(document.querySelectorAll(selector)).filter(el => {
+            // Filter out internal God Mode elements to prevent them from falling
+            return !el.closest('#god-mode-exit') && !el.closest('#god-mode-toast') && !el.closest('#matrix-canvas');
+        });
         const bodies = [];
 
         elements.forEach(el => {
