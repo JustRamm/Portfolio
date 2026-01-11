@@ -1236,8 +1236,22 @@ a {
 
     /* Services Mobile */
     .services-grid {
-        grid-template-columns: 1fr;
-        gap: 1.5rem;
+        display: flex !important;
+        overflow-x: auto !important;
+        scroll-snap-type: x mandatory !important;
+        gap: 1.5rem !important;
+        padding: 1rem 0 !important;
+        scrollbar-width: none;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .services-grid::-webkit-scrollbar {
+        display: none;
+    }
+
+    .service-card {
+        flex: 0 0 85% !important;
+        scroll-snap-align: center;
     }
 
     /* Skills Mobile */
@@ -3177,6 +3191,27 @@ body.god-mode #god-mode-exit {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
     gap: 2rem;
+}
+
+@media (max-width: 768px) {
+    .workflow-grid {
+        display: flex !important;
+        overflow-x: auto !important;
+        scroll-snap-type: x mandatory !important;
+        gap: 1.5rem !important;
+        padding: 1rem 0 !important;
+        scrollbar-width: none;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .workflow-grid::-webkit-scrollbar {
+        display: none;
+    }
+
+    .workflow-card {
+        flex: 0 0 85% !important;
+        scroll-snap-align: center;
+    }
 }
 
 .workflow-card {
