@@ -400,6 +400,9 @@ document.addEventListener('DOMContentLoaded', () => {
     function toggleGodMode(active) {
         if (active) {
             document.body.classList.add('god-mode');
+            // Force reflow to ensure God Mode styles (like font sizes) are applied before physics starts
+            void document.body.offsetHeight;
+
             toast.classList.add('show');
             setTimeout(() => toast.classList.remove('show'), 4000);
 
@@ -412,7 +415,14 @@ document.addEventListener('DOMContentLoaded', () => {
             const waves = document.getElementById('waves-container');
             if (waves) waves.style.display = 'none';
 
-            // 3. Start Gravity Physics (Matter.js)
+            // 3. Force all animated elements to be visible so they have rects
+            document.querySelectorAll('.fade-in, .slide-up, .section-title').forEach(el => {
+                el.classList.add('visible');
+                el.style.opacity = '1';
+                el.style.visibility = 'visible';
+            });
+
+            // 4. Start Gravity Physics (Matter.js)
             if (!window.Matter) {
                 const script = document.createElement('script');
                 script.src = "https://cdnjs.cloudflare.com/ajax/libs/matter-js/0.19.0/matter.min.js";
@@ -576,44 +586,58 @@ document.addEventListener('DOMContentLoaded', () => {
         // 3. Create Bodies from DOM Elements
         // We select key UI cards to fall. Text falls are messy, so we stick to containers.
         // Select all significant content blocks, including all headings, buttons, images, and containers
-        const selector = 'h1, h2, h3, h4, h5, h6, .btn, .badge, .logo, .nav-links a, p, img, .card, .bento-card, .service-card, .education-card, .workflow-card, .behind-the-code-card, .about-text, .edu-item, .btc-extra-item, .github-calendar-wrapper, .github-stats-img, .bento-item, .skill-tag, .footer-dock, .copyright, .contact-item';
-        const elements = Array.from(document.querySelectorAll(selector)).filter(el => {
-            // Filter out internal God Mode elements to prevent them from falling
+        const selector = [
+            'h1', 'h2', 'h3', 'h4', 'h5', 'h6',
+            '.section-title', '.btn', '.badge', '.logo', '.nav-links a',
+            'p', 'img', 'svg', '.card', '.bento-card', '.service-card',
+            '.education-card', '.workflow-card', '.behind-the-code-card',
+            '.about-text', '.edu-item', '.btc-extra-item', '.github-calendar-wrapper',
+            '.github-stats-img', '.bento-item', '.skill-tag', '.footer-dock',
+            '.copyright', '.contact-item', '.timeline-item', '.service-icon-img',
+            '.project-card', '.gallery-item', '.timeline-date', '.timeline-content',
+            '.company', '.edu-year', '.edu-place', '.btc-badge', '.workflow-step',
+            '.workflow-icon', '.skill-category', '.chip', '.bento-tag',
+            '.skill-category h3', '.container > h2', '.section-full-width h2'
+        ].join(', ');
+
+        const allElements = Array.from(document.querySelectorAll(selector)).filter(el => {
             return !el.closest('#god-mode-exit') && !el.closest('#god-mode-toast') && !el.closest('#matrix-canvas');
         });
+
+        // Calculate all positions FIRST to avoid layout shift conflicts
+        const elementData = allElements.map(el => {
+            const rect = el.getBoundingClientRect();
+            return { el, rect };
+        }).filter(data => data.rect.width > 0 && data.rect.height > 0);
+
         const bodies = [];
 
-        elements.forEach(el => {
-            const rect = el.getBoundingClientRect();
-            // Skip elements not visible or too small
-            if (rect.width === 0 || rect.height === 0) return;
+        elementData.forEach(data => {
+            const { el, rect } = data;
 
             // Create physics body matching element dimensions & position
-            // Matter.js positions are center-based. 
-            // We add window.scrollY because rect.top is relative to viewport, but physics world is absolute.
             const centerX = rect.left + rect.width / 2;
             const centerY = rect.top + rect.height / 2 + window.scrollY;
 
             const body = Bodies.rectangle(centerX, centerY, rect.width, rect.height, {
-                restitution: 0.4, // Less bouncy
+                restitution: 0.4,
                 friction: 0.5,
-                frictionAir: 0.06, // Significantly increased air friction for slow fall
-                density: 0.01, // Lighter items fall more naturally in "air"
-                angle: (Math.random() - 0.5) * 0.2 // Slightly more initial tilt
+                frictionAir: 0.06,
+                density: 0.01,
+                angle: (Math.random() - 0.5) * 0.2
             });
 
-            body.domElement = el; // Link back to DOM
+            body.domElement = el;
 
-            // Apply a small random kick to ensure they break the layout immediately
+            // Apply a small random kick
             Matter.Body.applyForce(body, body.position, {
                 x: (Math.random() - 0.5) * 0.02,
                 y: (Math.random() - 0.5) * 0.01
             });
 
-            // IMPORTANT: "Freeze" the visual element dimensions
+            // "Freeze" the visual element dimensions
             el.style.width = `${rect.width}px`;
             el.style.height = `${rect.height}px`;
-            // We will set position: fixed in the loop to start moving it
 
             bodies.push(body);
         });
