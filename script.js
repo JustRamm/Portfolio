@@ -17,35 +17,26 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 3000);
     }
 
-    // --- Typography Animation (Hero) ---
+    // --- Typography Animation (Hero Tagline) ---
     const textElement = document.getElementById('typing-text');
     if (textElement) {
-        const plainText = "Hi, I'm Abiram T Bijoy.\nBuilding the future.";
+        const taglineText = "Building the future.";
         textElement.innerHTML = '<span class="cursor">|</span>';
         let i = 0;
 
         function typeWriter() {
-            if (i < plainText.length) {
-                const char = plainText.charAt(i);
-                const currentContent = textElement.innerHTML.replace('<span class="cursor">|</span>', '');
-
-                if (char === '\n') {
-                    textElement.innerHTML = currentContent + '<br>' + '<span class="cursor">|</span>';
-                } else {
-                    textElement.innerHTML = currentContent + char + '<span class="cursor">|</span>';
-                }
-                i++;
-                setTimeout(typeWriter, 50);
-            } else {
+            if (i < taglineText.length) {
+                const char = taglineText.charAt(i);
+                // Insert character before the cursor
                 const cursor = textElement.querySelector('.cursor');
-                if (cursor) {
-                    setInterval(() => {
-                        cursor.style.opacity = cursor.style.opacity === '0' ? '1' : '0';
-                    }, 500);
-                }
+                const textNode = document.createTextNode(char);
+                textElement.insertBefore(textNode, cursor);
+                i++;
+                setTimeout(typeWriter, 80); // Slightly slower for better readability
             }
         }
-        setTimeout(typeWriter, 500);
+        // Small delay after splash screen to start typing
+        setTimeout(typeWriter, 3500);
     }
 
     // --- Scroll Animations (Intersection Observer) ---
