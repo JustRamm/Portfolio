@@ -2187,8 +2187,16 @@ body.god-mode {
 body.god-mode h1,
 body.god-mode h2,
 body.god-mode h3 {
-    text-shadow: 2px 2px 0px #FF00FF;
-    letter-spacing: 2px;
+    text-shadow: 2px 2px 0px #39FF14;
+    letter-spacing: 1px;
+    animation: glitch 1s infinite linear alternate-reverse;
+    font-size: 1.5rem !important;
+    /* Pixel font is huge, needs reduction */
+}
+
+body.god-mode h1 {
+    font-size: 2rem !important;
+    line-height: 1.4;
 }
 
 /* --- Enhanced God Mode (Matrix + CRT + Gravity) --- */
@@ -2201,6 +2209,8 @@ body.god-mode {
     --bg-color: #000000;
     font-family: 'Press Start 2P', monospace;
     overflow-x: hidden;
+    overflow-y: auto !important;
+    /* Ensure vertical scroll is allowed */
 }
 
 /* Matrix Rain Canvas */
@@ -2332,7 +2342,7 @@ body.god-mode h1,
 body.god-mode h2,
 body.god-mode h3 {
     text-shadow: 2px 2px 0px #39FF14;
-    letter-spacing: 4px;
+    letter-spacing: 1px;
     animation: glitch 1s infinite linear alternate-reverse;
 }
 

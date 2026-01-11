@@ -406,7 +406,11 @@ document.addEventListener('DOMContentLoaded', () => {
             // 1. Start Matrix Rain
             startMatrixRain();
 
-            // 2. Start Gravity Physics (Matter.js)
+            // 2. Hide tagline if needed (messy in physics)
+            const tagline = document.getElementById('typing-text');
+            if (tagline) tagline.style.opacity = '0';
+
+            // 3. Start Gravity Physics (Matter.js)
             if (!window.Matter) {
                 const script = document.createElement('script');
                 script.src = "https://cdnjs.cloudflare.com/ajax/libs/matter-js/0.19.0/matter.min.js";
@@ -624,10 +628,15 @@ document.addEventListener('DOMContentLoaded', () => {
         const mouseConstraint = MouseConstraint.create(engine, {
             mouse: mouse,
             constraint: {
-                stiffness: 0.2, // Spring stiffness for dragging
+                stiffness: 0.2,
                 render: { visible: false }
             }
         });
+
+        // Disable mouse wheel capture to allow scrolling
+        mouse.element.removeEventListener("mousewheel", mouse.mousewheel);
+        mouse.element.removeEventListener("DOMMouseScroll", mouse.mousewheel);
+
         World.add(engine.world, mouseConstraint);
 
         // 6. Run the Engine
