@@ -1076,7 +1076,8 @@ a {
         width: 30px;
         height: 20px;
         z-index: 1003;
-        /* Ensure it is above nav-links (1001) and navbar (1002) if needed */
+        order: -1;
+        /* Move to left */
     }
 
     .mobile-menu-toggle.active .hamburger-line:nth-child(1) {
@@ -1135,8 +1136,10 @@ a {
     }
 
     .navbar .logo {
-        font-size: 1.25rem;
+        font-size: 1.1rem;
         letter-spacing: 1px;
+        margin-left: auto;
+        /* Push logo to right when toggle is on left */
     }
 
     .logo-accent {
@@ -3332,5 +3335,55 @@ body.god-mode #god-mode-exit {
 
     100% {
         transform: rotate(360deg);
+    }
+}
+
+/* God Mode Mobile Adjustments */
+@media (max-width: 768px) {
+    body.god-mode #god-mode-exit {
+        top: 1rem;
+        right: 1rem;
+        left: auto;
+        padding: 0.6rem 1rem;
+        font-size: 0.5rem;
+        z-index: 2000;
+        width: auto;
+    }
+
+    body.god-mode .logo {
+        display: none !important;
+        /* Hide falling logo on mobile to make room for Exit btn in nav */
+    }
+
+    body.god-mode h1 {
+        font-size: 1.4rem !important;
+    }
+
+    body.god-mode h2 {
+        font-size: 1.1rem !important;
+    }
+
+    body.god-mode h3 {
+        font-size: 1rem !important;
+    }
+
+    body.god-mode p,
+    body.god-mode li,
+    body.god-mode span {
+        font-size: 0.65rem !important;
+        line-height: 1.4 !important;
+    }
+
+    body.god-mode .bento-card,
+    body.god-mode .service-card,
+    body.god-mode .education-card,
+    body.god-mode .workflow-card {
+        padding: 1rem !important;
+        min-height: auto !important;
+    }
+
+    body.god-mode .btn {
+        padding: 0.5rem 1rem !important;
+        font-size: 0.6rem !important;
     }
 }
