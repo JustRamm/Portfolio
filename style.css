@@ -257,13 +257,11 @@ a {
     align-items: center;
     justify-content: space-between;
     padding: 0 4rem;
-    /* Reduced side padding slightly for wider look, but added standard spacing */
     width: 100%;
-    /* Full width */
-    max-width: none;
-    /* Remove constraint */
-    margin: 0;
-    /* Remove auto margin */
+    max-width: 1400px;
+    /* Constrain wide hero content */
+    margin: 0 auto;
+    /* Center on large screens */
     padding-top: 80px;
     position: relative;
     z-index: 1;
@@ -290,13 +288,11 @@ a {
 }
 
 .hero-title {
-    font-size: 4.5rem;
+    font-size: clamp(2.5rem, 8vw, 4.5rem);
     font-weight: 800;
     margin-bottom: 0.75rem;
     line-height: 1.1;
     color: #FFFFFF;
-    white-space: nowrap;
-    /* Force single line */
 }
 
 .hero-title span {
@@ -304,12 +300,11 @@ a {
 }
 
 .hero-tagline {
-    font-size: 2rem;
+    font-size: clamp(1.25rem, 4vw, 2rem);
     font-weight: 500;
     color: var(--primary-color);
     margin-bottom: 2.5rem;
-    height: 1.2em;
-    /* Prevent layout shift */
+    min-height: 1.2em;
     display: flex;
     align-items: center;
 }
@@ -435,9 +430,18 @@ a {
 }
 
 /* About Section */
+.about-title-left {
+    text-align: left !important;
+    margin-bottom: 3rem;
+}
+
 .about-content {
-    max-width: 900px;
+    max-width: 80rem;
+    /* Matches projects section width */
     margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
 }
 
 .about-text {
@@ -815,7 +819,7 @@ a {
 }
 
 .section-full-width .about-content {
-    max-width: 1200px;
+    max-width: 80rem;
     margin: 0 auto;
 }
 
@@ -995,8 +999,9 @@ a {
     }
 
     h1 {
-        font-size: 2.5rem;
-        line-height: 1.2;
+        font-size: clamp(2rem, 10vw, 3.5rem);
+        line-height: 1.1;
+        margin-bottom: 1.5rem;
     }
 
     h2 {
@@ -1257,7 +1262,8 @@ a {
     gap: 1.5rem;
     padding: 0 2rem;
     width: 100%;
-    max-width: none;
+    max-width: 1600px;
+    margin: 0 auto;
 }
 
 @media (min-width: 1024px) {
@@ -2888,14 +2894,14 @@ body.god-mode #god-mode-exit {
     box-shadow: inset 0 0 50px rgba(0, 0, 0, 0.2);
 }
 
-/* Ensure inner content of full-width card is expansive but readable */
+/* Ensure inner content of full-width card aligns to the left as requested */
 .about-text p,
 .about-text .github-calendar-wrapper {
-    max-width: 1600px;
-    margin-left: auto;
+    max-width: 1400px;
+    margin-left: 2rem;
+    /* Align with general container padding */
     margin-right: auto;
-    width: 95%;
-    /* Stretch nearly all the way */
+    width: calc(100% - 4rem);
 }
 
 .about-text p {
@@ -2918,8 +2924,8 @@ body.god-mode #god-mode-exit {
 .education-card {
     background: rgba(255, 255, 255, 0.03);
     border: 1px solid rgba(255, 255, 255, 0.05);
-    border-radius: 1rem;
-    padding: 2rem;
+    border-radius: var(--border-radius);
+    padding: 3rem;
 }
 
 .education-card h3 {
@@ -2952,15 +2958,132 @@ body.god-mode #god-mode-exit {
 
 .edu-place {
     display: block;
-    font-size: 0.9rem;
-    color: #9ca3af;
+    font-size: 0.95rem;
+    color: #cbd5e0;
     margin-bottom: 0.5rem;
 }
 
 .edu-desc {
-    font-size: 0.9rem;
-    color: #6b7280;
+    font-size: 0.95rem;
+    color: #a0aec0;
+    line-height: 1.6;
 }
+
+/* Behind the Code Block */
+.behind-the-code-card {
+    position: relative;
+    padding: 3rem;
+    margin: 0;
+    border-radius: var(--border-radius);
+    background: linear-gradient(135deg, rgba(139, 92, 246, 0.1) 0%, rgba(0, 229, 255, 0.05) 100%);
+    border: 1px solid rgba(139, 92, 246, 0.2);
+    overflow: hidden;
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+}
+
+.btc-glass-effect {
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle at center, rgba(139, 92, 246, 0.1) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: 0;
+}
+
+.btc-content {
+    position: relative;
+    z-index: 1;
+}
+
+.btc-title-group {
+    margin-bottom: 2rem;
+}
+
+.btc-badge {
+    display: inline-block;
+    padding: 0.4rem 1rem;
+    background: var(--primary-color);
+    color: white;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    border-radius: 4px;
+    margin-bottom: 1rem;
+}
+
+.behind-the-code-card h3 {
+    font-size: 2rem;
+    margin-bottom: 0;
+    background: linear-gradient(to right, #FFFFFF, var(--primary-color));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.btc-main-text {
+    font-size: 1.15rem;
+    line-height: 1.8;
+    color: #E2E8F0 !important;
+    margin-bottom: 2.5rem;
+    max-width: 800px;
+}
+
+.btc-extra-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+}
+
+.btc-extra-item {
+    display: flex;
+    gap: 1.25rem;
+    align-items: flex-start;
+}
+
+.btc-extra-icon {
+    font-size: 1.5rem;
+    background: rgba(255, 255, 255, 0.05);
+    width: 45px;
+    height: 45px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+    flex-shrink: 0;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.btc-extra-text {
+    font-size: 0.95rem;
+    color: var(--text-light);
+    line-height: 1.6;
+}
+
+.btc-extra-text strong {
+    color: white;
+    display: block;
+    margin-bottom: 0.25rem;
+}
+
+@media (max-width: 768px) {
+    .behind-the-code-card {
+        padding: 2.5rem 1.5rem;
+    }
+
+    .education-card,
+    .about-text {
+        padding: 2.5rem 1.5rem;
+    }
+
+    .behind-the-code-card h3 {
+        font-size: 1.75rem;
+    }
+}
+
 
 
 
@@ -3110,6 +3233,29 @@ body.god-mode #god-mode-exit {
 .calendar text.ContributionCalendar-label {
     fill: #9ca3af !important;
     font-size: 9px !important;
+}
+
+@media (max-width: 480px) {
+
+    .behind-the-code-card,
+    .education-card,
+    .about-text {
+        padding: 1.5rem 1rem;
+    }
+
+    .btc-extra-item {
+        gap: 1rem;
+    }
+
+    .btc-extra-icon {
+        width: 38px;
+        height: 38px;
+        font-size: 1.2rem;
+    }
+
+    .hero-title {
+        font-size: clamp(1.8rem, 12vw, 2.5rem);
+    }
 }
 
 .loading-calendar {
