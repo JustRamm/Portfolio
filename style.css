@@ -1076,8 +1076,7 @@ a {
         width: 30px;
         height: 20px;
         z-index: 1003;
-        order: -1;
-        /* Move to left */
+        /* order: -1; Removed to swap position back */
     }
 
     .mobile-menu-toggle.active .hamburger-line:nth-child(1) {
@@ -1138,8 +1137,7 @@ a {
     .navbar .logo {
         font-size: 1.1rem;
         letter-spacing: 1px;
-        margin-left: auto;
-        /* Push logo to right when toggle is on left */
+        /* margin-left: auto; Removed to swap position back */
     }
 
     .logo-accent {
